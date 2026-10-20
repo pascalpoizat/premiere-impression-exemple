@@ -1,0 +1,3 @@
+-- Migration initiale (vide).
+-- Chaque feature ajoute SA migration : V2__<feature>.sql, V3__<feature>.sql, ...
+-- Ne jamais modifier une migration déjà poussée sur main : en créer une nouvelle.

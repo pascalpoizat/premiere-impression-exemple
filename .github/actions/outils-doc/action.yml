@@ -1,0 +1,14 @@
+name: Outils de documentation
+description: Installe les outils qui compilent doc/ (make -C doc). À adapter si l'équipe change d'outil.
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: pandoc et WeasyPrint
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc libpango-1.0-0 libpangoft2-1.0-0
+        pip install weasyprint

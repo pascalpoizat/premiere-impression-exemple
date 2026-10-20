@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PremièreImpression</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>PremièreImpression</h1>
+    <label class="profil-courant">Profil
+      <select id="choix-profil"></select>
+    </label>
+    <details class="nouveau-profil">
+      <summary>Nouveau profil</summary>
+      <form id="form-profil">
+        <label>Pseudo <input name="pseudo" required maxlength="50"></label>
+        <label>Compétences <textarea name="competences" rows="3" maxlength="5000"
+          placeholder="Java, Spring Boot, SQL, travail en équipe…"></textarea></label>
+        <button type="submit">Créer</button>
+      </form>
+    </details>
+  </header>
+  <p class="erreur" id="erreur" role="alert"></p>
+
+  <main>
+    <section id="section-candidature">
+      <h2>Candidatures et analyse d'annonce</h2>
+      <div class="colonnes">
+        <div>
+          <h3>Mes candidatures</h3>
+          <ul id="liste-candidatures" class="liste"></ul>
+          <details>
+            <summary>Nouvelle candidature</summary>
+            <form id="form-candidature">
+              <label>Entreprise <input name="entreprise" required maxlength="120"></label>
+              <label>Poste <input name="poste" required maxlength="120"></label>
+              <label>Entretien le <input name="dateHeureEntretien" type="datetime-local"></label>
+              <label>Adresse de l'entretien <input name="adresseEntretien" maxlength="255"></label>
+              <label>Texte de l'annonce <textarea name="texteAnnonce" rows="8" required maxlength="20000"></textarea></label>
+              <button type="submit">Enregistrer</button>
+            </form>
+          </details>
+        </div>
+        <div id="analyse" class="panneau">
+          <p class="aide">Choisissez une candidature pour analyser son annonce.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-tenue">
+      <h2>Tenue : vêtements qui me vont</h2>
+      <div class="colonnes">
+        <div>
+          <h3>Mes mensurations (cm)</h3>
+          <form id="form-mensurations">
+            <div class="grille-mesures">
+              <label>Tour de poitrine <input name="tourPoitrine" type="number" step="0.5" min="50" max="200" required></label>
+              <label>Tour de taille <input name="tourTaille" type="number" step="0.5" min="40" max="200" required></label>
+              <label>Tour de hanches <input name="tourHanches" type="number" step="0.5" min="50" max="200" required></label>
+              <label>Longueur de jambe <input name="longueurJambe" type="number" step="0.5" min="40" max="130" required></label>
+              <label>Carrure <input name="carrure" type="number" step="0.5" min="25" max="70" required></label>
+            </div>
+            <button type="submit">Enregistrer</button>
+          </form>
+          <details>
+            <summary>Prêter un vêtement</summary>
+            <form id="form-vetement">
+              <label>Type <select name="type" id="type-vetement"></select></label>
+              <label>Nom <input name="nom" required maxlength="120" placeholder="Veste bleu marine"></label>
+              <label>Description <input name="description" maxlength="1000"></label>
+              <p class="aide">Mesures à plat du vêtement, en cm :</p>
+              <div class="grille-mesures" id="mesures-vetement"></div>
+              <button type="submit">Proposer au prêt</button>
+            </form>
+          </details>
+        </div>
+        <div class="panneau">
+          <form id="form-recherche" class="ligne">
+            <label>Type <select name="type" id="filtre-type"><option value="">Tous</option></select></label>
+            <label>Nombre <input name="k" type="number" min="1" max="50" value="10"></label>
+            <button type="submit">Trouver</button>
+          </form>
+          <div id="compatibles"><p class="aide">Renseignez vos mensurations, puis lancez la recherche.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

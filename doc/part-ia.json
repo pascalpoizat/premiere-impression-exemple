@@ -1,0 +1,16 @@
+{
+  "titre": "Part IA par compétence — dossier de lancement et v0.1.0",
+  "commentaire": "ia : part produite par l'IA (%) ; plafond : part IA maximale que l'équipe s'autorise (%)",
+  "axes": [
+    { "nom": "Code",          "niveau": "bas",  "ia": 100, "plafond": 70 },
+    { "nom": "Tests",         "niveau": "bas",  "ia": 100, "plafond": 60 },
+    { "nom": "CI/CD",         "niveau": "bas",  "ia": 100, "plafond": 80 },
+    { "nom": "Rédaction",     "niveau": "bas",  "ia": 95,  "plafond": 70 },
+    { "nom": "Débogage",      "niveau": "bas",  "ia": 100, "plafond": 70 },
+    { "nom": "Validation",    "niveau": "haut", "ia": 40,  "plafond": 20 },
+    { "nom": "Algorithmique", "niveau": "haut", "ia": 90,  "plafond": 30 },
+    { "nom": "Spécification", "niveau": "haut", "ia": 85,  "plafond": 40 },
+    { "nom": "Conception",    "niveau": "haut", "ia": 80,  "plafond": 30 },
+    { "nom": "Idéation",      "niveau": "haut", "ia": 50,  "plafond": 30 }
+  ]
+}

@@ -1,0 +1,63 @@
+:root {
+  --encre: #1b1f2e;
+  --texte: #3a4052;
+  --discret: #7a8094;
+  --accent: #5b45d6;
+  --accent-clair: #efecfd;
+  --filet: #e3e5ec;
+  --fond: #ffffff;
+  --fond-doux: #f6f7fa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --encre: #f1f2f6;
+    --texte: #c9ccd6;
+    --discret: #8d93a5;
+    --accent: #9d8cff;
+    --accent-clair: #26214a;
+    --filet: #2c3040;
+    --fond: #12141c;
+    --fond-doux: #1a1d28;
+  }
+  .araignee { background: #ffffff; border-radius: 12px; padding: 12px; }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font: 16px/1.6 "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--texte);
+  background: var(--fond);
+}
+
+.contenu { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+.hero { padding: 72px 0 56px; background: var(--fond-doux); border-bottom: 1px solid var(--filet); }
+.sur-titre { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { margin: 8px 0 0; font-size: clamp(36px, 7vw, 56px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; color: var(--encre); }
+h1::after { content: ""; display: block; width: 64px; height: 6px; margin-top: 16px; border-radius: 3px; background: var(--accent); }
+.accroche { max-width: 640px; margin: 20px 0 28px; font-size: 19px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.bouton { padding: 10px 18px; border-radius: 8px; font-weight: 600; text-decoration: none; color: #fff; background: var(--accent); }
+.bouton.secondaire { color: var(--accent); background: var(--accent-clair); }
+
+section { padding: 40px 0 8px; }
+h2 { margin: 0 0 12px; font-size: 24px; font-weight: 700; color: var(--encre); }
+h3 { margin: 4px 0 8px; font-size: 18px; color: var(--encre); }
+a { color: var(--accent); }
+
+.grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.carte { padding: 20px; border: 1px solid var(--filet); border-radius: 12px; background: var(--fond); }
+.carte p { margin: 0 0 8px; }
+.version { font-size: 12px; font-weight: 700; color: var(--accent); }
+.algo { font-size: 14px; font-weight: 600; color: var(--accent); }
+.auteur { font-size: 14px; color: var(--discret); }
+
+.equipe { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 0; list-style: none; }
+.araignee { display: block; width: 100%; max-width: 760px; height: auto; }
+
+footer { padding: 40px 24px 56px; font-size: 14px; color: var(--discret); }
+.discret { color: var(--discret); font-size: 14px; }

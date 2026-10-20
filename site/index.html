@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PremièreImpression</title>
+  <meta name="description" content="PremièreImpression : tout ce qui aide à faire bonne impression en entretien. Projet d'exemple M1 MIAGE Apprentissage.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="contenu">
+      <p class="sur-titre">Projet M1 MIAGE Apprentissage · exemple, équipe fictive</p>
+      <h1>PremièreImpression</h1>
+      <p class="accroche">Tout ce qui aide un étudiant ou un apprenti à faire bonne impression en entretien : comprendre l'annonce, trouver la bonne tenue, se préparer, arriver à l'heure.</p>
+      <nav class="actions">
+        <a class="bouton" href="dossier.pdf">Dossier de projet (PDF)</a>
+        <a class="bouton secondaire" href="https://github.com/pascalpoizat/premiere-impression-exemple">Code source</a>
+        <a class="bouton secondaire" href="https://github.com/pascalpoizat/premiere-impression-exemple/releases">Versions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenu">
+    <section>
+      <h2>Le projet</h2>
+      <p>La préparation d'un entretien est éclatée entre les sites d'emploi, l'agenda, les révisions et les applications de transport, et beaucoup d'étudiants n'ont pas de tenue adaptée. PremièreImpression réunit tout autour d'un objet central, <strong>la candidature et son entretien</strong>, et <strong>calcule des décisions</strong> plutôt que de stocker des données : quelles compétences l'annonce attend, quels vêtements prêtés par d'autres étudiants vont réellement, quoi réviser, à quelle heure partir.</p>
+    </section>
+
+    <section>
+      <h2>Fonctionnalités</h2>
+      <div class="grille">
+        <article class="carte">
+          <p class="version">v0.1.0 · livrée</p>
+          <h3>Analyse d'annonce</h3>
+          <p>Extrait les compétences attendues par une annonce, calcule la correspondance avec le profil et liste les compétences à travailler.</p>
+          <p class="algo">TF-IDF, similarité cosinus</p>
+          <p class="auteur">Alice O'Péhidémerveille</p>
+        </article>
+        <article class="carte">
+          <p class="version">v0.1.0 · livrée</p>
+          <h3>Ajustement morphologique</h3>
+          <p>Propose les vêtements prêtés qui vont réellement, d'après les mensurations et non la taille de l'étiquette.</p>
+          <p class="algo">Distance pondérée asymétrique, top-k par tas</p>
+          <p class="auteur">Bob Léponje</p>
+        </article>
+        <article class="carte">
+          <p class="version">v0.1.0 · prévue</p>
+          <h3>Planning de révision</h3>
+          <p>Planifie les révisions jusqu'au jour de l'entretien, sous contrainte de temps disponible.</p>
+          <p class="algo">Sac à dos</p>
+          <p class="auteur">Charles McGill</p>
+        </article>
+        <article class="carte">
+          <p class="version">v0.1.0 · prévue</p>
+          <h3>Heure de départ</h3>
+          <p>Calcule l'heure à laquelle partir en transports en commun pour arriver à l'heure.</p>
+          <p class="algo">Connection Scan Algorithm</p>
+          <p class="auteur">David Copperfield</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Architecture</h2>
+      <p>Front web (HTML, JavaScript natif) → API REST (Spring Boot 4) → back Java 21 en architecture hexagonale, un module par domaine (<code>candidature</code>, <code>tenue</code>) → PostgreSQL, schéma versionné par Flyway. Plus de 200 tests (unitaires, propriétés, intégration, architecture) et une release automatique à chaque tag.</p>
+    </section>
+
+    <section>
+      <h2>Équipe</h2>
+      <p class="discret">Équipe fictive : ce projet est un exemple réalisé par l'enseignant avec une IA.</p>
+      <ul class="equipe">
+        <li>Alice O'Péhidémerveille</li>
+        <li>Bob Léponje</li>
+        <li>Charles McGill</li>
+        <li>David Copperfield</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Part IA / part humaine</h2>
+      <p>Part de l'IA générative déclarée par compétence, comparée aux plafonds fixés par l'équipe. Sur cet exemple, l'IA dépasse les plafonds sur tous les axes : c'est précisément ce qu'une équipe d'étudiants doit éviter sur le haut niveau.</p>
+      <img class="araignee" src="part-ia.svg" alt="Graphe en araignée de la part de l'IA par compétence">
+    </section>
+  </main>
+
+  <footer class="contenu">
+    <p>PremièreImpression · exemple M1 MIAGE Apprentissage · <a href="https://github.com/pascalpoizat/premiere-impression-exemple">pascalpoizat/premiere-impression-exemple</a> · construit à partir du <a href="https://github.com/pascalpoizat/template-projet-m1-miage">dépôt modèle</a></p>
+  </footer>
+</body>
+</html>
