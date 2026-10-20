@@ -7,8 +7,8 @@ plugins {
 }
 
 group = 'fr.miage'
-// la CI de release passe la version du tag : -PversionLivraison=0.1.0
-version = findProperty('versionLivraison') ?: '0.1.0-SNAPSHOT'
+// la CI de release passe la version du tag : -PversionLivraison=0.1.1
+version = findProperty('versionLivraison') ?: '0.1.1-SNAPSHOT'
 
 java {
 	toolchain {
@@ -96,6 +96,13 @@ jacocoTestReport {
 		xml.required = true // lu par Codecov et SonarCloud
 		html.required = true
 	}
+}
+
+// dossier PDF : même contrat que la CI (make -C doc produit doc/dossier.pdf) ; pandoc et weasyprint requis
+tasks.register('dossier', Exec) {
+	description = 'Compile le dossier de projet en PDF (doc/dossier.pdf)'
+	group = 'documentation'
+	commandLine 'make', '-C', 'doc'
 }
 
 // renseigner sonarProjectKey / sonarOrganization dans gradle.properties
