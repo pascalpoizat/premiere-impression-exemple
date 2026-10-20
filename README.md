@@ -54,6 +54,7 @@ Les dépendances vont toujours vers le domaine. Un test ArchUnit (`ArchitectureH
 |---|---|---|---|
 | v0.1.0 | Analyse d'annonce et correspondance avec le profil | TF-IDF, similarité cosinus, racinisation | [F1](doc/features/v0.1.0-F1-analyse-annonce.md) |
 | v0.1.0 | Ajustement morphologique | distance pondérée asymétrique, top-k par tas borné | [F2](doc/features/v0.1.0-F2-ajustement-morphologique.md) |
+| v0.1.0 (rattrapage, en cours) | Planning de révision jusqu'au jour J | placement glouton par stratégie (CTA, MKW) avec file de priorité, coupure au plus long préfixe | [F3](doc/features/v0.1.0-F3-planning-revision.md) |
 
 ## Prérequis
 

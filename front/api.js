@@ -31,3 +31,13 @@ export const typesDeVetements = () => appeler('/vetements/types');
 export const declarerVetement = (vetement) => envoyer('POST', '/vetements', vetement);
 export const vetementsCompatibles = (profilId, k, type) =>
   appeler(`/profils/${profilId}/vetements-compatibles?k=${k}${type ? `&type=${type}` : ''}`);
+
+// F3 : concepts requis et planning de révision
+export const listerConceptsRequis = (candidatureId) => appeler(`/candidatures/${candidatureId}/concepts-requis`);
+export const ajouterConceptRequis = (candidatureId, concept) =>
+  envoyer('POST', `/candidatures/${candidatureId}/concepts-requis`, concept);
+export const supprimerConceptRequis = (candidatureId, conceptId) =>
+  appeler(`/candidatures/${candidatureId}/concepts-requis/${conceptId}`, { method: 'DELETE' });
+export const planningRevision = (candidatureId, strategie, disponibilites) =>
+  appeler(`/candidatures/${candidatureId}/planning-revision?strategie=${strategie}`
+    + `&disponibilites=${disponibilites.join(',')}`);
