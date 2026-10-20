@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# base locale de jqwik (exemples ayant échoué, rejoués en premier)
+.jqwik-database
+
+# fichiers de l'éditeur (Metals / Bloop, extension Scala de VS Code)
+.bloop/
+.metals/

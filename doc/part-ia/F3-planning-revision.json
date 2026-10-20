@@ -1,0 +1,67 @@
+{
+  "titre": "F3 — Planning de révision (Charles)",
+  "poids": 1,
+  "commentaire": "Haut niveau humain (élicitation aidée, conception, spécification, déroulés à la main, relecture du code) ; code et tests écrits par l'IA, guidés par les critères humains",
+  "axes": [
+    {
+      "nom": "Code",
+      "niveau": "bas",
+      "ia": 100,
+      "plafond": 70
+    },
+    {
+      "nom": "Tests",
+      "niveau": "bas",
+      "ia": 75,
+      "plafond": 60
+    },
+    {
+      "nom": "CI/CD",
+      "niveau": "bas",
+      "ia": 90,
+      "plafond": 80
+    },
+    {
+      "nom": "Rédaction",
+      "niveau": "bas",
+      "ia": 85,
+      "plafond": 70
+    },
+    {
+      "nom": "Débogage",
+      "niveau": "bas",
+      "ia": 95,
+      "plafond": 70
+    },
+    {
+      "nom": "Validation",
+      "niveau": "haut",
+      "ia": 20,
+      "plafond": 20
+    },
+    {
+      "nom": "Algorithmique",
+      "niveau": "haut",
+      "ia": 15,
+      "plafond": 30
+    },
+    {
+      "nom": "Spécification",
+      "niveau": "haut",
+      "ia": 30,
+      "plafond": 40
+    },
+    {
+      "nom": "Conception",
+      "niveau": "haut",
+      "ia": 25,
+      "plafond": 30
+    },
+    {
+      "nom": "Idéation",
+      "niveau": "haut",
+      "ia": 20,
+      "plafond": 30
+    }
+  ]
+}

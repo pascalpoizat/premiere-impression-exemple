@@ -8,6 +8,7 @@ Il ne communique qu'avec l'API REST : toutes les URL sont dans `api.js`.
 | `app.js` | point d'entrée, choix du profil courant |
 | `candidature.js` | F1 : candidatures et analyse d'annonce |
 | `tenue.js` | F2 : mensurations, prêt de vêtements, vêtements compatibles |
+| `revision.js` | F3 : concepts requis et planning de révision jusqu'à la veille de l'entretien |
 | `commun.js` | utilitaires partagés (échappement anti-XSS, erreurs) |
 
 ```bash

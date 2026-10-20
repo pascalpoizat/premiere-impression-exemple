@@ -40,7 +40,7 @@
 <!-- Nombre de tests par type, propriétés vérifiées, couverture du module. -->
 
 ### Part IA / part humaine
-<!-- Valeurs déclarées pour cette feature (mêmes axes que doc/part-ia.json) et explication des dépassements de plafond. -->
+<!-- Valeurs déclarées pour cette feature (mêmes axes que doc/part-ia.json). Le JSON garde la part IA et le plafond ; l'araignée montre la part humaine (100 − part IA) et le plancher (100 − plafond) pour le haut niveau, la part IA et le plafond pour le bas niveau. Expliquer chaque objectif non tenu. -->
 
 | Compétence | Part IA | Plafond |
 |---|---|---|

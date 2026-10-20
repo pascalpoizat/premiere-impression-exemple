@@ -216,3 +216,36 @@ p:has(> img.araignee) { margin: 0; break-inside: avoid; }
 
 /* l'annexe commence sur sa propre page, après les 4 pages du dossier */
 #annexe-part-ia { break-before: page; }
+
+/* aération : chaque section est séparée de la précédente par un filet */
+h1:not(.title):not(.partie) {
+  margin-top: 8mm;
+  padding-top: 3mm;
+  border-top: 0.4pt solid var(--filet, #e3e5ec);
+}
+
+/* grandes parties (lancement, chaque release, annexes) : nouvelle page et bandeau, sans numéro de section */
+h1.partie {
+  break-before: page;
+  margin: 0 0 4mm;
+  padding: 3mm 4mm;
+  font-size: 15pt;
+  color: white;
+  background: var(--accent);
+  border-radius: 2mm;
+}
+h1.partie::before { content: none; counter-increment: none; }
+h1.partie.sans-saut { break-before: auto; margin-top: 4mm; }
+h1.partie + h1 { margin-top: 0; padding-top: 0; border-top: none; }
+#annexe-part-ia { break-before: auto; }
+
+/* avertissement encadré de rouge */
+.avertissement {
+  margin: 3mm 0;
+  padding: 2.5mm 3.5mm;
+  border: 1.2pt solid #c62828;
+  border-radius: 1.5mm;
+  background: #fdecea;
+  break-inside: avoid;
+}
+.avertissement p { margin: 0; }

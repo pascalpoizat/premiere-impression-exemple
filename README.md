@@ -54,6 +54,7 @@ Les dépendances vont toujours vers le domaine. Un test ArchUnit (`ArchitectureH
 |---|---|---|---|
 | v0.1.0 | Analyse d'annonce et correspondance avec le profil | TF-IDF, similarité cosinus, racinisation | [F1](doc/features/v0.1.0-F1-analyse-annonce.md) |
 | v0.1.0 | Ajustement morphologique | distance pondérée asymétrique, top-k par tas borné | [F2](doc/features/v0.1.0-F2-ajustement-morphologique.md) |
+| v0.1.1 (rattrapage de v0.1.0) | Planning de révision jusqu'au jour J | placement glouton par stratégie (CTA, MKW) avec file de priorité, coupure au plus long préfixe | [F3](doc/features/v0.1.0-F3-planning-revision.md) |
 
 ## Prérequis
 
@@ -82,7 +83,10 @@ Front : `python3 -m http.server 8000 -d front`, puis ouvrir http://localhost:800
 ```bash
 ./gradlew build          # compile, tests unitaires + intégration, rapport de couverture
 open build/reports/jacoco/test/html/index.html
+./gradlew testInterface  # tests d'interface de F3 (Playwright et Selenium), ports 8080 et 8000 libres
 ```
+
+Les tests d'interface lancent eux-mêmes le back et le front, puis pilotent un navigateur : Chromium installé par Playwright (`./gradlew installerNavigateurs`), et le Chrome de la machine pour Selenium. Ils sont coûteux (téléchargement des navigateurs, temps d'exécution) : c'est pour cela qu'ils ont leur propre tâche Gradle, hors de `./gradlew build`, et qu'ils ne tournent que sur la machine du développeur, pas dans la CI de GitHub.
 
 Conventions : `*Test` pour les tests unitaires (sans Spring), `*IT` pour les tests d'intégration (`@SpringBootTest`).
 
@@ -90,8 +94,11 @@ Conventions : `*Test` pour les tests unitaires (sans Spring), `*IT` pour les tes
 
 ```bash
 make -C doc              # pandoc + WeasyPrint (pip install weasyprint) ; mise en page dans doc/style.css
+./gradlew dossier        # la même chose, depuis Gradle
 make -C doc site         # aperçu local de la page de projet dans build/site/
 ```
+
+Le PDF versionné (`doc/dossier.pdf`) est mis à jour à chaque livraison. Entre deux livraisons, on le compile en local pour le relire, et la CI le compile à chaque push qui touche `doc/`, sur toutes les branches : il est téléchargeable comme artefact du workflow « Documentation ».
 
 ## Livrer une version
 

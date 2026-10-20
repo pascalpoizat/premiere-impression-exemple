@@ -86,6 +86,33 @@
         </div>
       </div>
     </section>
+    <section id="section-revision">
+      <h2>Révision : planning jusqu'au jour J</h2>
+      <div class="colonnes">
+        <div>
+          <label>Candidature <select id="revision-candidature"></select></label>
+          <h3>Concepts requis</h3>
+          <div id="liste-concepts"></div>
+          <form id="form-concept">
+            <label>Concept <input name="nom" required maxlength="120" placeholder="SQL"></label>
+            <div class="grille-mesures">
+              <label>Niveau actuel <input name="actuel" type="number" min="0" max="5" value="0" required></label>
+              <label>Niveau requis <input name="requis" type="number" min="0" max="5" value="3" required></label>
+              <label>Minutes par niveau <input name="qtn" type="number" min="1" step="15" value="60" required></label>
+            </div>
+            <button type="submit">Ajouter</button>
+          </form>
+        </div>
+        <div class="panneau">
+          <form id="form-planning">
+            <div id="disponibilites"></div>
+            <label>Stratégie <select id="strategie"></select></label>
+            <button type="submit">Planifier</button>
+          </form>
+          <div id="planning"></div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script type="module" src="app.js"></script>
