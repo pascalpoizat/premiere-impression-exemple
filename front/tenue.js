@@ -39,8 +39,11 @@ async function chargerMensurations() {
   formulaire.reset();
   $('#compatibles').innerHTML = '<p class="aide">Renseignez vos mensurations, puis lancez la recherche.</p>';
   if (!profilCourant) return;
+  const profil = profilCourant;
   try {
-    const mensurations = await api.lireMensurations(profilCourant.id);
+    const mensurations = await api.lireMensurations(profil.id);
+    // le profil a changé pendant l'appel : ces mensurations ne sont plus les siennes
+    if (profil !== profilCourant) return;
     for (const champ of ['tourPoitrine', 'tourTaille', 'tourHanches', 'longueurJambe', 'carrure']) {
       formulaire[champ].value = mensurations[champ];
     }
@@ -81,8 +84,9 @@ async function rechercher(evenement) {
   evenement?.preventDefault();
   if (!profilCourant) return;
   const filtre = $('#form-recherche');
-  const ajustements = await tenter(() => api.vetementsCompatibles(profilCourant.id, filtre.k.value, filtre.type.value));
-  if (ajustements) afficherCompatibles(ajustements);
+  const profil = profilCourant;
+  const ajustements = await tenter(() => api.vetementsCompatibles(profil.id, filtre.k.value, filtre.type.value));
+  if (ajustements && profil === profilCourant) afficherCompatibles(ajustements);
 }
 
 function afficherCompatibles(ajustements) {

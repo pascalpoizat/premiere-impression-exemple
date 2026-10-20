@@ -10,7 +10,10 @@ async function afficherCandidatures() {
   liste.replaceChildren();
   $('#analyse').innerHTML = '<p class="aide">Choisissez une candidature pour analyser son annonce.</p>';
   if (!profilCourant) return;
-  const candidatures = await tenter(() => api.listerCandidatures(profilCourant.id)) ?? [];
+  const profil = profilCourant;
+  const candidatures = await tenter(() => api.listerCandidatures(profil.id)) ?? [];
+  // le profil a changé pendant l'appel : cette réponse est périmée, celle du nouveau profil va suivre
+  if (profil !== profilCourant) return;
   for (const candidature of candidatures) {
     const element = document.createElement('li');
     const date = candidature.dateHeureEntretien
@@ -28,7 +31,8 @@ async function analyser(candidature, element) {
   document.querySelectorAll('#liste-candidatures li').forEach((li) => li.classList.remove('actif'));
   element.classList.add('actif');
   const analyse = await tenter(() => api.analyserAnnonce(candidature.id, K));
-  if (analyse) afficherAnalyse(candidature, analyse);
+  // une autre candidature a été choisie entre-temps : on n'affiche pas cette analyse périmée
+  if (analyse && element.classList.contains('actif')) afficherAnalyse(candidature, analyse);
 }
 
 function pastilles(motsCles, classe) {
