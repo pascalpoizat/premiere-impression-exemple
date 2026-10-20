@@ -235,3 +235,16 @@ INSERT INTO mesure_vetement (vetement_id, mesure, valeur_cm)
 SELECT v.id, 'TOUR_HANCHES', 102 FROM vetement v JOIN profil p ON p.id = v.proprietaire_id
 WHERE p.pseudo = 'alex' AND v.nom = 'Robe chemise vert sapin'
   AND NOT EXISTS (SELECT 1 FROM mesure_vetement m WHERE m.vetement_id = v.id AND m.mesure = 'TOUR_HANCHES');
+
+-- Concepts requis (F3), par ordre d'importance dans l'annonce : candidature d'alex chez Société Générale
+INSERT INTO concept_requis (candidature_id, nom, actuel, requis, qtn, rang)
+SELECT c.id, v.nom, v.actuel, v.requis, v.qtn, v.rang
+FROM candidature c
+JOIN profil p ON p.id = c.profil_id AND p.pseudo = 'alex'
+CROSS JOIN (VALUES ('Spring Boot', 2, 4, 120, 1),
+                   ('Tests JUnit et Mockito', 1, 4, 60, 2),
+                   ('Docker', 0, 3, 90, 3),
+                   ('Kubernetes', 0, 2, 180, 4),
+                   ('SQL', 3, 3, 60, 5)) AS v (nom, actuel, requis, qtn, rang)
+WHERE c.entreprise = 'Société Générale' AND c.poste = 'Développeur Java / Spring en alternance'
+  AND NOT EXISTS (SELECT 1 FROM concept_requis r WHERE r.candidature_id = c.id AND r.nom = v.nom);

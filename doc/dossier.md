@@ -1,10 +1,12 @@
 ---
 title: "PremièreImpression"
-subtitle: "Dossier de projet — M1 MIAGE Apprentissage — v0.1.0"
+subtitle: "Dossier de projet — M1 MIAGE Apprentissage — v0.1.1"
 author:
   - Alice O'Péhidémerveille, Bob Léponje, Charles McGill, David Copperfield
 date: 24 novembre 2026
 ---
+
+# Lancement du projet {.partie .sans-saut}
 
 # Équipe, comptes développeurs et dépôt
 
@@ -47,11 +49,11 @@ Une feature a un effet sur **la BD, le back, l'API REST et le front**. Chaque fe
 
 | Version | Alice (candidature) | Bob (tenue) | Charles (préparation) | David (ponctualité) |
 |-----|---------|---------|---------|---------|
-| **v0.1.0** 24/11 | ✔ Analyse d'annonce et correspondance avec le profil — *TF-IDF, similarité cosinus* | ✔ Ajustement morphologique — *distance pondérée asymétrique, top-k par tas* | ✘ Planning de révision jusqu'au jour J — *sac à dos sous contrainte de temps* | ✘ Heure de départ — *Connection Scan Algorithm* |
+| **v0.1.0** 24/11 | ✔ Analyse d'annonce et correspondance avec le profil — *TF-IDF, similarité cosinus* | ✔ Ajustement morphologique — *distance pondérée asymétrique, top-k par tas* | ✔ Planning de révision jusqu'au jour J — *placement glouton par stratégie (CTA, MKW), coupure au plus long préfixe* (initialement : sac à dos) | ✘ Heure de départ — *Connection Scan Algorithm* |
 | **v0.2.0** 08/12 | Conflits d'agenda avec temps de trajet — *ordonnancement d'intervalles* | Calendrier des prêts avec délais de nettoyage — *arbre d'intervalles* | Mémorisation des notions — *répétition espacée SM-2* | Marge de sécurité tirée de l'historique des retards — *quantiles empiriques* |
 | **v1.0.0** 19/01 | Parcours d'apprentissage pour combler l'écart de compétences — *tri topologique des prérequis* | Composition de tenue — *contraintes, backtracking* | Simulation d'entretien adaptative — *classement Elo des questions et du candidat* | Répartition des vêtements entre plusieurs entretiens — *algorithme hongrois* |
 
-✔ livrée en v0.1.0 (détail dans les sections F1 et F2) · ✘ non livrée : dans cet exemple, seules deux des quatre features ont été réalisées.
+✔ livrée (F1 et F2 en v0.1.0 ; F3 en retard sur le plan, livrée en v0.1.1) · ✘ non livrée : dans cet exemple, seules trois des quatre features ont été réalisées. Le plan évolue d'une version du dossier à l'autre : la case de F3 décrit l'algorithme retenu, et le sac à dos annoncé au lancement figure parmi ses alternatives écartées.
 
 # Architecture
 
@@ -101,8 +103,21 @@ Les étapes s'enchaînent **dans cet ordre, sans en sauter** : on ne commence un
 **Traçabilité.**
 
 - Chaque pull request comporte une section « Usage de l'IA » : outil utilisé, objet de la demande, ce qui a été repris, modifié ou rejeté. Elle est relue par un autre membre.
-- La part de l'IA est déclarée **par compétence** dans le graphe en araignée **demandé par le cours** (annexe), car une mesure unique serait biaisée : faire écrire du code par l'IA n'a pas le même poids que lui faire concevoir. Les compétences de **haut niveau** (idéation, conception, spécification, algorithmique, validation) sont séparées de celles de **bas niveau** (code, tests, CI/CD, rédaction, débogage), et chaque axe compare la part IA réelle à un **plafond** que l'équipe s'autorise, plus bas pour le haut niveau. Les valeurs sont mesurées en lignes d'après les PR quand c'est possible, estimées sinon. Une araignée accompagnera chaque feature en 0.1.0, 0.2.0 et 1.0.0.
+- La part de l'IA est déclarée **par compétence** dans le graphe en araignée **demandé par le cours** (annexe), car une mesure unique serait biaisée : faire écrire du code par l'IA n'a pas le même poids que lui faire concevoir. Les compétences de **haut niveau** (idéation, conception, spécification, algorithmique, validation) sont séparées de celles de **bas niveau** (code, tests, CI/CD, rédaction, débogage), et chaque axe a un **plafond** de part IA que l'équipe s'autorise, plus bas pour le haut niveau. Le graphe montre, sur la moitié **haut niveau**, la **part humaine** (100 − part IA) face à un **plancher** (100 − plafond), à dépasser, car c'est le travail humain qu'on évalue ; sur la moitié **bas niveau**, la **part IA** face au **plafond**, à ne pas dépasser. Chaque moitié reste ainsi lisible loin du centre ; un même rayon ne veut donc pas dire la même chose des deux côtés. Les valeurs sont mesurées en lignes d'après les PR quand c'est possible, estimées sinon. Une araignée accompagnera chaque feature en 0.1.0, 0.2.0 et 1.0.0.
 - Exemple de critique d'idée obtenue avec l'IA : `exemples-ia/`.
+- **Notre modèle d'évaluation a évolué en cours de projet**, au fil de F3. Nous avons précisé ce que compte chaque axe : en Validation, seule la *conception* de la vérification (quoi vérifier et comment), le code des tests, leur exécution et la correction des défauts relevant des axes Tests et Débogage ; un nom technique donné par l'IA à un concept défini par l'humain compte pour moitié. Nous avons aussi essayé plusieurs représentations de l'araignée, jusqu'à la représentation mixte actuelle. Les valeurs de F1 et F2, estimées avec le modèle précédent, n'ont pas été réévaluées : **il ne faut pas chercher une cohérence stricte entre les versions** du dossier, ni entre F1, F2 et F3.
+- **Écart déclaré.** F1 et F2 ont été commitées directement sur `main`, sans issue ni pull request : leur part IA a donc été estimée, et non mesurée sur des PR. Le circuit complet (issue, branche, commits par étape, PR relue) est appliqué à partir de F3.
+
+**L'usage recommandé, tel que F3 l'illustre.** F1 et F2 montrent ce qu'il ne faut pas faire : l'IA y a aussi conçu et spécifié. F3 a été menée autrement, et c'est ce que nous recommandons :
+
+- **l'humain élicite, conçoit et spécifie**, aidé par une IA qui pose des questions, propose des options argumentées et critique, sans trancher à sa place ;
+- **l'humain valide** : il déroule les exemples à la main, formule les invariants et les propriétés, relit le code ;
+- **l'IA écrit le code et les tests**, mais jamais seule : les tests traduisent des critères écrits par l'humain, sinon ils ne vérifieraient que ce que l'IA a cru comprendre ;
+- **l'IA propose à l'humain de faire lui-même** chaque tâche de haut niveau avant de la faire ; s'il est bloqué, il lui demande de reformuler ou de prendre la main, et c'est déclaré.
+
+Le résultat se lit dans l'araignée de F3 : sur le haut niveau, la part humaine atteint ou dépasse tous les planchers ; le bas niveau est confié à l'IA.
+
+# Release v0.1.0 {.partie}
 
 # Livraison v0.1.0
 
@@ -190,15 +205,106 @@ Release : [v0.1.0](https://github.com/pascalpoizat/premiere-impression-exemple/r
 
 ![](part-ia/F2-ajustement-morphologique.svg){.araignee}
 
+# Release v0.1.1 {.partie}
+
+# Livraison v0.1.1 : rattrapage de v0.1.0
+
+| Feature | Responsable | Algorithme | BD | API | Tests | Couverture |
+|----------|---------|-----------|------|--------------|------|-----|
+| F3 Planning de révision | Charles | file de priorité (CTA, MKW), préfixe paresseux | `V4__planning_revision` | `…/concepts-requis`, `…/planning-revision` | 62 + 2 | 98,6 % |
+
+264 tests dans `./gradlew build`. Les 2 tests d'interface de F3 (Playwright et Selenium) sont lancés à part, par `./gradlew testInterface`, seulement sur la machine du développeur : ils sont coûteux (navigateurs, temps). 
+
+F3 était prévue en v0.1.0 : livrée en retard sur le plan, elle fait l'objet d'une version corrective, v0.1.1. Release : [v0.1.1](https://github.com/pascalpoizat/premiere-impression-exemple/releases/tag/v0.1.1), avec le jar et ce dossier, construits par l'intégration continue.
+
+# F3 — Planning de révision (Charles)
+
+**Besoin.** Une annonce demande des compétences à un certain niveau, et le temps jusqu'à l'entretien est limité. Il faut ordonner la remontée des niveaux selon une stratégie, garder ce qui tient dans le temps disponible, et le répartir jour par jour jusqu'à la veille de l'entretien.
+
+Les notations (`nrᵢ`, `qtnᵢ`, `d`…) sont définies en [annexe](#annexe-notations).
+
+**Modèle.** Pour chaque concept requis par la candidature : niveau actuel et niveau requis (de 0 à 5), coût d'un niveau `qtn` en minutes, et **rang**, l'ordre d'importance du concept dans l'annonce. Pour chaque jour jusqu'à la veille de l'entretien : une disponibilité en minutes.
+
+**Algorithme.**
+
+1. *Séquence des niveaux*, niveau entier par niveau entier. Une stratégie choisit le concept à monter :
+   - `CLOSE_TO_ACHIEVEMENT` (CTA) : le plus petit reste à apprendre `nrᵢ · qtnᵢ` (en ordonnancement, *Shortest Remaining Processing Time*) ;
+   - `MINIMAL_KNOWLEDGE` (MKW) : le plus grand nombre de niveaux restants `nrᵢ`.
+
+   Égalités : niveau actuel le plus bas, puis niveau requis le plus haut, puis plus petit rang.
+2. *Coupure au plus long préfixe* dont le coût tient dans le temps disponible `d` : on oublie le niveau qui fait dépasser et tout ce qui suit. Aucun niveau n'est monté en partie.
+3. *Placement* dans les jours, remplis dans l'ordre ; un niveau peut s'étaler sur plusieurs jours.
+
+**Complexité.** La séquence est un flux paresseux sur une file de priorité, consommé par la coupure : O((K + 1) log m) pour `K` niveaux gardés et `m` concepts, au pire O(L log m) quand tout tient. Cette optimisation vient de la relecture du code par le responsable.
+
+**Propriétés constatées.** CTA maximise le nombre de concepts amenés au niveau requis ; MKW minimise le plus grand nombre de niveaux restants. Vérifiées contre une recherche exhaustive, sans contre-exemple.
+
+**Alternatives écartées.** Le *sac à dos* annoncé au lancement, 0/1 puis à choix multiples : plus puissant (il permettait de renoncer à un concept), mais il ajoutait une seconde famille de stratégies ; la coupure du placement, plus simple, a été préférée. Écartés aussi : couper au milieu d'un niveau, sauter le niveau qui dépasse, imposer l'alternance des concepts.
+
+**Couches.**
+
+- **BD** : `concept_requis`, avec l'unicité du nom et du rang par candidature.
+- **Back** : module `preparation`. La date de l'entretien est obtenue par le port `CandidaturesConnues`, branché sur le module `candidature`.
+- **API** : `POST`, `GET`, `DELETE /api/v1/candidatures/{id}/concepts-requis` ; `GET …/planning-revision?strategie=&disponibilites=`, avec les erreurs 400, 404 et 409.
+- **Front** : section « Révision » : concepts, disponibilités jour par jour, stratégie, planning et niveaux atteints.
+
+**Tests (62, plus 2 tests d'interface).** F3 ajoute au projet de nouveaux **types** de tests :
+
+- les exemples de la fiche, déroulés à la main par le responsable, devenus des tests ;
+- des **tests de propriétés** (jqwik) : chaque invariant de la fiche vérifié sur 500 cas générés par stratégie, avec une graine fixe ;
+
+::: avertissement
+**Attention à la version de jqwik.** Le projet utilise jqwik **1.9.3**. Les versions **1.10.0 et suivantes** ajoutent à la sortie des tests un texte adressé aux assistants d'IA : la 1.10.0 leur demandait de supprimer les tests et le code jqwik, la 1.10.1 leur dit de ne pas utiliser la bibliothèque et d'ignorer les résultats des tests. Avec un assistant de code, épinglez une version 1.9.x et ne la faites pas monter sans vérifier.
+:::
+
+- un **oracle exhaustif** pour les deux propriétés constatées ;
+- un test de **paresse** (la coupure ne calcule que ce qu'elle garde) et un test de **déterminisme** ;
+- les services avec de faux adaptateurs et une **horloge fixe** ; la persistance sur le vrai schéma ; l'API de bout en bout ;
+- des **tests d'interface**, le même scénario écrit avec **Playwright** et avec **Selenium** pour comparer les deux outils.
+
+Le code a été **cassé volontairement** à trois endroits : chaque mutation est détectée par au moins deux tests. Vérifier « en vrai » a révélé deux défauts du front, corrigés : un décalage au changement d'heure, et une réponse d'API périmée qui pouvait écraser l'affichage (défaut présent aussi dans F1 et F2).
+
+**Limites.** Coût identique pour tous les niveaux d'un concept ; échelle de niveaux fixe ; concepts saisis à la main (le lien avec les compétences extraites par F1 reste à faire) ; jours remplis dans l'ordre plutôt qu'étalés. L'espacement des révisions relève de la répétition espacée prévue en v0.2.0.
+
+**Part IA / part humaine.** Profil inverse de F1 et F2 : l'humain a mené l'élicitation, la conception, la spécification et la validation ; l'IA a écrit le code et les tests. Deux points sont déclarés :
+
+- en **validation**, la part humaine atteint tout juste son plancher (80 %). Ne compte ici que la conception de la vérification : l'humain a fixé les critères, les propriétés et les conjectures, déroulé les exemples et relu le code ; l'IA a proposé les mutations à tester, l'oracle exhaustif et les bornes des données générées. Écrire, exécuter et corriger relève des axes Tests et Débogage ;
+- le protocole demande que l'humain **écrive** le cœur de l'algorithme. Ici, il l'a **conçu** et en a **relu** le code, d'où une part IA faible sur l'axe Algorithmique (15 %) ; mais c'est l'IA qui l'a **écrit en Java**, et cela compte dans l'axe Code (100 %).
+
+![](part-ia/F3-planning-revision.svg){.araignee}
+
+# Annexes {.partie}
+
 # Annexe : part IA / part humaine du projet {#annexe-part-ia}
 
 ![](part-ia.svg){.araignee}
 
 **Fusion des araignées.**
 
-- Chaque livrable a sa propre araignée, dans `doc/part-ia/` : le dossier de lancement avec le socle technique, F1 et F2.
+- Chaque livrable a sa propre araignée, dans `doc/part-ia/` : le dossier de lancement avec le socle technique, F1, F2 et F3.
 - L'araignée du projet est leur **moyenne pondérée**, calculée par `doc/outils/fusion-araignees.py` à chaque compilation.
 - Ici, chaque livrable a le même poids. Une équipe peut préférer pondérer par le nombre de lignes produites ou par le temps passé, à condition de le dire.
-- Les axes et les plafonds sont communs à tous les livrables : le script refuse de fusionner des araignées qui diffèrent.
+- Les axes et les plafonds (donc les planchers) sont communs à tous les livrables : le script refuse de fusionner des araignées qui diffèrent.
+- Les fichiers JSON enregistrent la part IA mesurée et le plafond ; le graphe en déduit la part humaine et le plancher pour le haut niveau. La représentation se règle dans `doc/outils/araignee.py` (`--representation=mixte`, `humain` ou `ia`).
 
-**Constat.** La part IA dépasse le plafond sur tous les axes, y compris sur le haut niveau (algorithmique 97 %, conception 90 %). C'est assumé pour un exemple réalisé par un enseignant avec une IA, mais ce serait un signal d'alerte pour une équipe d'étudiants : le haut niveau est précisément ce qui est évalué.
+**À lire avec prudence.** Cette synthèse moyenne des valeurs obtenues avec des modèles d'évaluation différents : F1 et F2 ont été estimées avant que nous précisions les axes (en particulier la Validation) et que nous adoptions la représentation mixte ; F3 l'a été après. Elle indique une tendance, pas une mesure comparable d'une version à l'autre.
+
+**Constat.** Sur tous les axes, l'objectif n'est pas tenu : la part humaine du haut niveau reste sous le plancher, et la part IA du bas niveau au-dessus du plafond. La moyenne **met à plat** des profils opposés. F1 et F2, où l'IA a aussi conçu et spécifié, tirent la part humaine du haut niveau vers le bas ; F3, où l'humain a gardé le haut niveau, la fait remonter. C'est pourquoi chaque feature a sa propre araignée : c'est elle qu'il faut lire pour juger une démarche. Pour une équipe d'étudiants, une part humaine sous le plancher sur le haut niveau serait un signal d'alerte, puisque c'est précisément ce qui est évalué.
+
+# Annexe : notations de F3 {#annexe-notations}
+
+| Notation | Signification |
+|---|---|
+| `m` | nombre de concepts requis par la candidature |
+| `Cᵢ` | le concept de rang `i` (1 = le plus important dans l'annonce) |
+| `actuelᵢ`, `requisᵢ` | niveau actuel et niveau requis de `Cᵢ`, de 0 à 5 |
+| `qtnᵢ` | coût d'un niveau de `Cᵢ`, en minutes (le même pour tous ses niveaux) |
+| `nrᵢ` | niveaux restants de `Cᵢ` : `max(0, requisᵢ − actuelᵢ)` au départ, puis diminue à chaque niveau placé |
+| `nrᵢ · qtnᵢ` | reste à apprendre de `Cᵢ`, en minutes |
+| `Cᵢ→k` | le niveau `k` de `Cᵢ` (passer de `k − 1` à `k`), de coût `qtnᵢ` |
+| `L` | nombre total de niveaux à remonter au départ : `Σ nrᵢ` |
+| `b` | besoin total au départ, en minutes : `Σ nrᵢ · qtnᵢ` |
+| `n` | nombre de jours, d'aujourd'hui à la veille de l'entretien |
+| `dⱼ`, `d` | temps disponible le jour `j` (de 0 à 1 440 minutes), et temps disponible total `Σ dⱼ` |
+| `K` | nombre de niveaux gardés par la coupure (ceux qui tiennent dans `d`) |
+| CTA, MKW | les stratégies `CLOSE_TO_ACHIEVEMENT` et `MINIMAL_KNOWLEDGE` |

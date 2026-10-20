@@ -3,6 +3,7 @@ import * as api from './api.js';
 import { $, tenter, EVENEMENT_PROFIL } from './commun.js';
 import { initialiserCandidatures } from './candidature.js';
 import { initialiserTenue } from './tenue.js';
+import { initialiserRevision } from './revision.js';
 
 let profils = [];
 
@@ -31,6 +32,7 @@ async function creerProfil(evenement) {
 
 initialiserCandidatures();
 initialiserTenue();
+initialiserRevision();
 $('#choix-profil').addEventListener('change', annoncerProfilCourant);
 $('#form-profil').addEventListener('submit', creerProfil);
 chargerProfils().catch(() => {
