@@ -25,9 +25,19 @@ Entre modules : un module n'utilise jamais le domaine ni les tables d'un autre. 
 
 ## Branches et commits
 
-- `main` : versions livrées et taguées (`v0.1.0-SNAPSHOT`, `v0.1.0`, ...)
+- `main` : versions livrées et taguées (`v0.1.0`, `v0.1.1`, …) ; on n'y pousse jamais directement
 - `develop` : intégration
-- `feature/<issue>-<nom-court>` : une branche par feature, fusionnée dans `develop` par pull request relue par un autre membre
+- `feature/<issue>-<nom-court>` : une branche par feature, partie de `develop`
+
+Le circuit, de la feature à la release, passe par **deux pull requests**, chacune relue par un autre membre :
+
+1. **Issue** au format « Feature » (fiche, algorithme, critères d'acceptation).
+2. **Branche** `feature/<issue>-<nom-court>` créée depuis `develop` à jour ; un commit par étape de la démarche, avec `Refs #<issue>`.
+3. **PR de feature**, de la branche vers `develop`, au format du modèle de PR (checklist, « Usage de l'IA », part IA). Elle contient `Closes #<issue>` et n'est fusionnée qu'une fois la CI verte.
+4. **PR de release**, de `develop` vers `main`, quand une version est prête (voir « Livraisons »).
+5. **Tag annoté** sur `main`, après la fusion : il déclenche la publication de la release et le redéploiement de la page de projet.
+
+**Fermeture des issues.** GitHub ne ferme une issue automatiquement que si une PR fusionnée dans la **branche par défaut** (`main`) contient un mot-clé **en anglais** : `Closes`, `Fixes` ou `Resolves #<issue>` (« Ferme » n'est pas reconnu). La PR de feature, qui vise `develop`, ne ferme donc rien : c'est la **PR de release** qui doit reprendre une ligne `Closes #<issue>` pour chaque feature qu'elle livre.
 
 Avant ton premier commit, vérifie ton identité, sinon ta contribution risque de ne pas t'être attribuée :
 
@@ -43,12 +53,28 @@ git config user.email "email-associé-à-ton-compte-github"
 
 ## Livraisons
 
+À la fin de chaque séance, une **pré-livraison** : un tag sur `develop`, que la CI publie comme pré-version.
+
 ```bash
 git tag -a v0.1.0-SNAPSHOT -m "Pré-livraison fin de séance"
 git push origin v0.1.0-SNAPSHOT
 ```
 
-À la livraison : mettre à jour `doc/part-ia.json`, le dossier et la page de projet (`site/`), vérifier `./gradlew build` et `make -C doc`, puis pousser le tag `v0.1.0`. La CI publie la release, avec le jar et `dossier.pdf`, et sa version est celle du tag.
+Pour une **livraison** (exemple : `v0.1.1`) :
+
+1. Sur `develop`, mettre à jour le dossier, `doc/part-ia/` et la page de projet (`site/`), et la version par défaut dans `build.gradle` ; vérifier `./gradlew build`, `./gradlew dossier` et, en local, `./gradlew testInterface`.
+2. Ouvrir la **PR de release** de `develop` vers `main` (contenu de la version, vérifications faites, une ligne `Closes #<issue>` par feature livrée), la faire relire et la fusionner.
+3. Poser le **tag annoté** sur `main` à jour, et le pousser :
+
+   ```bash
+   git switch main && git pull
+   git tag -a v0.1.1 -m "Livraison v0.1.1"
+   git push origin v0.1.1
+   ```
+
+4. Vérifier que la release contient le jar et `dossier.pdf`, et que la page de projet affiche la nouvelle version.
+
+La CI construit le jar et le dossier à partir du tag : la version publiée est celle du tag, sans le « v ».
 
 ## Usage de l'IA
 

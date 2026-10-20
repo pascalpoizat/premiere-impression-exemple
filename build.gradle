@@ -7,8 +7,8 @@ plugins {
 }
 
 group = 'fr.miage'
-// la CI de release passe la version du tag : -PversionLivraison=0.1.1
-version = findProperty('versionLivraison') ?: '0.1.1-SNAPSHOT'
+// la CI de release passe la version du tag : -PversionLivraison=0.1.2
+version = findProperty('versionLivraison') ?: '0.1.2-SNAPSHOT'
 
 java {
 	toolchain {
