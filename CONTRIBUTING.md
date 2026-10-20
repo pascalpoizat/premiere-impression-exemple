@@ -33,9 +33,11 @@ Le circuit, de la feature à la release, passe par **deux pull requests**, chacu
 
 1. **Issue** au format « Feature » (fiche, algorithme, critères d'acceptation).
 2. **Branche** `feature/<issue>-<nom-court>` créée depuis `develop` à jour ; un commit par étape de la démarche, avec `Refs #<issue>`.
-3. **PR de feature**, de la branche vers `develop`, au format du modèle de PR (checklist, « Usage de l'IA », part IA). Elle contient `Ferme #<issue>` et n'est fusionnée qu'une fois la CI verte.
+3. **PR de feature**, de la branche vers `develop`, au format du modèle de PR (checklist, « Usage de l'IA », part IA). Elle contient `Closes #<issue>` et n'est fusionnée qu'une fois la CI verte.
 4. **PR de release**, de `develop` vers `main`, quand une version est prête (voir « Livraisons »).
 5. **Tag annoté** sur `main`, après la fusion : il déclenche la publication de la release et le redéploiement de la page de projet.
+
+**Fermeture des issues.** GitHub ne ferme une issue automatiquement que si une PR fusionnée dans la **branche par défaut** (`main`) contient un mot-clé **en anglais** : `Closes`, `Fixes` ou `Resolves #<issue>` (« Ferme » n'est pas reconnu). La PR de feature, qui vise `develop`, ne ferme donc rien : c'est la **PR de release** qui doit reprendre une ligne `Closes #<issue>` pour chaque feature qu'elle livre.
 
 Avant ton premier commit, vérifie ton identité, sinon ta contribution risque de ne pas t'être attribuée :
 
@@ -61,7 +63,7 @@ git push origin v0.1.0-SNAPSHOT
 Pour une **livraison** (exemple : `v0.1.1`) :
 
 1. Sur `develop`, mettre à jour le dossier, `doc/part-ia/` et la page de projet (`site/`), et la version par défaut dans `build.gradle` ; vérifier `./gradlew build`, `./gradlew dossier` et, en local, `./gradlew testInterface`.
-2. Ouvrir la **PR de release** de `develop` vers `main` (contenu de la version, vérifications faites), la faire relire et la fusionner.
+2. Ouvrir la **PR de release** de `develop` vers `main` (contenu de la version, vérifications faites, une ligne `Closes #<issue>` par feature livrée), la faire relire et la fusionner.
 3. Poser le **tag annoté** sur `main` à jour, et le pousser :
 
    ```bash

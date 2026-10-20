@@ -1,4 +1,5 @@
-Ferme #
+Closes #
+<!-- Mot-clé en anglais (closes, fixes, resolves) : GitHub ne reconnaît pas « Ferme ». L'issue ne se fermera qu'à la fusion de la PR de release dans main. -->
 
 ## Checklist (dans l'ordre de la démarche)
 - [ ] Fiche `doc/features/...` validée par un autre membre
