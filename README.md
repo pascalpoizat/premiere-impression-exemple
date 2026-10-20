@@ -102,10 +102,12 @@ Le PDF versionné (`doc/dossier.pdf`) est mis à jour à chaque livraison. Entre
 
 ## Livrer une version
 
-Pousser un tag suffit : la CI construit l'application et la documentation, puis publie la release avec le jar et `dossier.pdf`.
+Une livraison passe par une **PR de release** de `develop` vers `main`, relue, puis par un **tag annoté** posé sur `main`. Le tag déclenche la CI, qui construit l'application et la documentation, puis publie la release avec le jar et `dossier.pdf` ; la page de projet est redéployée. Le circuit complet, de la feature (PR vers `develop`) à la release, est décrit dans [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ```bash
-git tag -a v0.1.0 -m "Livraison v0.1.0" && git push origin v0.1.0
+git switch main && git pull
+git tag -a v0.1.1 -m "Livraison v0.1.1"
+git push origin v0.1.1
 ```
 
 ## Contribuer
