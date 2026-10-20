@@ -20,6 +20,9 @@ repositories {
 	mavenCentral()
 }
 
+// version de Selenium imposée à tous ses modules (sinon le BOM de Spring Boot en fixe une plus ancienne)
+ext['selenium.version'] = '4.51.0'
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-h2console'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -41,6 +44,9 @@ dependencies {
 	testImplementation 'com.tngtech.archunit:archunit-junit5:1.5.1'
 	// tests de propriétés (F3) ; pas de 1.10.x, qui affiche une clause « anti-IA » dans la sortie des tests
 	testImplementation 'net.jqwik:jqwik:1.9.3'
+	// tests d'interface de F3 (tâche testInterface) : les deux outils, pour les comparer sur un même scénario
+	testImplementation 'com.microsoft.playwright:playwright:1.63.0'
+	testImplementation 'org.seleniumhq.selenium:selenium-java'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -55,8 +61,34 @@ tasks.named('jar') {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+	useJUnitPlatform {
+		excludeTags 'interface' // lents et demandent un navigateur : tâche testInterface
+	}
 	finalizedBy tasks.named('jacocoTestReport')
+}
+
+// Playwright n'utilise que Chromium : on n'installe que lui
+tasks.register('installerNavigateurs', JavaExec) {
+	description = 'Installe Chromium pour les tests d\'interface Playwright'
+	group = 'verification'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.microsoft.playwright.CLI'
+	args 'install', 'chromium'
+}
+
+// tests d'interface : lancent le back (port 8080), servent le front (port 8000) et pilotent un navigateur.
+// Coûteux (navigateurs, temps) : ils ne tournent que sur la machine du développeur, ni dans build ni en CI.
+tasks.register('testInterface', Test) {
+	description = 'Tests d\'interface de bout en bout (Playwright et Selenium)'
+	group = 'verification'
+	testClassesDirs = sourceSets.test.output.classesDirs
+	classpath = sourceSets.test.runtimeClasspath
+	useJUnitPlatform {
+		includeTags 'interface'
+	}
+	environment 'PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD', '1'
+	dependsOn 'installerNavigateurs'
+	shouldRunAfter 'test'
 }
 
 jacocoTestReport {
