@@ -1,0 +1,67 @@
+{
+  "titre": "F1 — Analyse d'annonce (Alice)",
+  "poids": 1,
+  "commentaire": "Feature choisie par l'humain parmi les propositions de l'IA ; conçue, codée et testée par l'IA",
+  "axes": [
+    {
+      "nom": "Code",
+      "niveau": "bas",
+      "ia": 100,
+      "plafond": 70
+    },
+    {
+      "nom": "Tests",
+      "niveau": "bas",
+      "ia": 100,
+      "plafond": 60
+    },
+    {
+      "nom": "CI/CD",
+      "niveau": "bas",
+      "ia": 100,
+      "plafond": 80
+    },
+    {
+      "nom": "Rédaction",
+      "niveau": "bas",
+      "ia": 100,
+      "plafond": 70
+    },
+    {
+      "nom": "Débogage",
+      "niveau": "bas",
+      "ia": 100,
+      "plafond": 70
+    },
+    {
+      "nom": "Validation",
+      "niveau": "haut",
+      "ia": 85,
+      "plafond": 20
+    },
+    {
+      "nom": "Algorithmique",
+      "niveau": "haut",
+      "ia": 100,
+      "plafond": 30
+    },
+    {
+      "nom": "Spécification",
+      "niveau": "haut",
+      "ia": 95,
+      "plafond": 40
+    },
+    {
+      "nom": "Conception",
+      "niveau": "haut",
+      "ia": 95,
+      "plafond": 30
+    },
+    {
+      "nom": "Idéation",
+      "niveau": "haut",
+      "ia": 70,
+      "plafond": 30
+    }
+  ]
+}

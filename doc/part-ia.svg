@@ -33,49 +33,49 @@
 <text x="187.0" y="18.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7.5" font-weight="700" fill="#1f9d6b" text-anchor="end" letter-spacing="0.8">HAUT NIVEAU</text>
 <text x="203.0" y="18.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7.5" font-weight="700" fill="#5b45d6" text-anchor="start" letter-spacing="0.8">BAS NIVEAU</text>
 <polygon points="218.4,80.1 247.4,113.9 281.4,152.0 256.2,196.4 218.4,223.9 188.3,172.5 168.8,171.0 151.8,152.0 168.8,133.0 185.0,121.2" fill="none" stroke="#1f9d6b" stroke-width="1.6" stroke-dasharray="4 3"/>
-<polygon points="228.4,49.3 282.4,88.5 303.0,152.0 278.0,212.3 228.4,254.7 181.7,193.1 116.4,209.1 103.2,152.0 125.1,101.2 178.3,100.6" fill="#5b45d6" fill-opacity="0.22" stroke="#5b45d6" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="228.4,49.3 282.4,88.5 303.0,152.0 280.6,214.2 228.4,254.7 171.6,223.9 110.2,213.6 95.6,152.0 116.4,94.9 176.0,93.5" fill="#5b45d6" fill-opacity="0.22" stroke="#5b45d6" stroke-width="1.8" stroke-linejoin="round"/>
 <circle cx="228.4" cy="49.3" r="2.3" fill="#5b45d6"/>
 <circle cx="282.4" cy="88.5" r="2.3" fill="#5b45d6"/>
 <circle cx="303.0" cy="152.0" r="2.3" fill="#5b45d6"/>
-<circle cx="278.0" cy="212.3" r="2.3" fill="#5b45d6"/>
+<circle cx="280.6" cy="214.2" r="2.3" fill="#5b45d6"/>
 <circle cx="228.4" cy="254.7" r="2.3" fill="#5b45d6"/>
-<circle cx="181.7" cy="193.1" r="2.3" fill="#5b45d6"/>
-<circle cx="116.4" cy="209.1" r="2.3" fill="#5b45d6"/>
-<circle cx="103.2" cy="152.0" r="2.3" fill="#5b45d6"/>
-<circle cx="125.1" cy="101.2" r="2.3" fill="#5b45d6"/>
-<circle cx="178.3" cy="100.6" r="2.3" fill="#5b45d6"/>
+<circle cx="171.6" cy="223.9" r="2.3" fill="#5b45d6"/>
+<circle cx="110.2" cy="213.6" r="2.3" fill="#5b45d6"/>
+<circle cx="95.6" cy="152.0" r="2.3" fill="#5b45d6"/>
+<circle cx="116.4" cy="94.9" r="2.3" fill="#5b45d6"/>
+<circle cx="176.0" cy="93.5" r="2.3" fill="#5b45d6"/>
 <text x="425.0" y="30.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#1b1f2e" text-anchor="start" >Part IA par compétence</text>
 <line x1="425" y1="46" x2="443" y2="46" stroke="#5b45d6" stroke-width="6" stroke-opacity="0.5"/>
 <text x="449.0" y="49.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7.5" font-weight="500" fill="#7a8094" text-anchor="start" >part IA réelle</text>
 <line x1="525" y1="46" x2="543" y2="46" stroke="#1f9d6b" stroke-width="1.6" stroke-dasharray="4 3"/>
 <text x="549.0" y="49.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7.5" font-weight="500" fill="#7a8094" text-anchor="start" >plafond que l&#x27;équipe s&#x27;autorise</text>
-<text x="425.0" y="70.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#1f9d6b" text-anchor="start" >Haut niveau : IA 69 % en moyenne (plafond 30 %)</text>
+<text x="425.0" y="70.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#1f9d6b" text-anchor="start" >Haut niveau : IA 81 % en moyenne (plafond 30 %)</text>
 <text x="425.0" y="84.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Idéation</text>
 <rect x="503" y="78" width="150" height="6" rx="3" fill="#d9f2e3"/>
-<rect x="503" y="78" width="75.0" height="6" rx="3" fill="#5b45d6"/>
+<rect x="503" y="78" width="85.5" height="6" rx="3" fill="#5b45d6"/>
 <line x1="548.0" y1="75.5" x2="548.0" y2="86.5" stroke="#1f9d6b" stroke-width="1.6"/>
-<text x="661.0" y="84.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >50 %</text>
+<text x="661.0" y="84.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >57 %</text>
 <text x="425.0" y="98.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Conception</text>
 <rect x="503" y="92" width="150" height="6" rx="3" fill="#d9f2e3"/>
-<rect x="503" y="92" width="120.0" height="6" rx="3" fill="#5b45d6"/>
+<rect x="503" y="92" width="135.0" height="6" rx="3" fill="#5b45d6"/>
 <line x1="548.0" y1="89.5" x2="548.0" y2="100.5" stroke="#1f9d6b" stroke-width="1.6"/>
-<text x="661.0" y="98.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >80 %</text>
+<text x="661.0" y="98.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >90 %</text>
 <text x="425.0" y="112.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Spécification</text>
 <rect x="503" y="106" width="150" height="6" rx="3" fill="#d9f2e3"/>
-<rect x="503" y="106" width="127.5" height="6" rx="3" fill="#5b45d6"/>
+<rect x="503" y="106" width="138.0" height="6" rx="3" fill="#5b45d6"/>
 <line x1="563.0" y1="103.5" x2="563.0" y2="114.5" stroke="#1f9d6b" stroke-width="1.6"/>
-<text x="661.0" y="112.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >85 %</text>
+<text x="661.0" y="112.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >92 %</text>
 <text x="425.0" y="126.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Algorithmique</text>
 <rect x="503" y="120" width="150" height="6" rx="3" fill="#d9f2e3"/>
-<rect x="503" y="120" width="135.0" height="6" rx="3" fill="#5b45d6"/>
+<rect x="503" y="120" width="145.5" height="6" rx="3" fill="#5b45d6"/>
 <line x1="548.0" y1="117.5" x2="548.0" y2="128.5" stroke="#1f9d6b" stroke-width="1.6"/>
-<text x="661.0" y="126.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >90 %</text>
+<text x="661.0" y="126.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >97 %</text>
 <text x="425.0" y="140.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Validation</text>
 <rect x="503" y="134" width="150" height="6" rx="3" fill="#d9f2e3"/>
-<rect x="503" y="134" width="60.0" height="6" rx="3" fill="#5b45d6"/>
+<rect x="503" y="134" width="105.0" height="6" rx="3" fill="#5b45d6"/>
 <line x1="533.0" y1="131.5" x2="533.0" y2="142.5" stroke="#1f9d6b" stroke-width="1.6"/>
-<text x="661.0" y="140.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >40 %</text>
-<text x="425.0" y="164.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#5b45d6" text-anchor="start" >Bas niveau : IA 99 % en moyenne (plafond 70 %)</text>
+<text x="661.0" y="140.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >70 %</text>
+<text x="425.0" y="164.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#5b45d6" text-anchor="start" >Bas niveau : IA 100 % en moyenne (plafond 70 %)</text>
 <text x="425.0" y="178.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Code</text>
 <rect x="503" y="172" width="150" height="6" rx="3" fill="#d9f2e3"/>
 <rect x="503" y="172" width="150.0" height="6" rx="3" fill="#5b45d6"/>
@@ -93,9 +93,9 @@
 <text x="661.0" y="206.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >100 %</text>
 <text x="425.0" y="220.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Rédaction</text>
 <rect x="503" y="214" width="150" height="6" rx="3" fill="#d9f2e3"/>
-<rect x="503" y="214" width="142.5" height="6" rx="3" fill="#5b45d6"/>
+<rect x="503" y="214" width="147.0" height="6" rx="3" fill="#5b45d6"/>
 <line x1="608.0" y1="211.5" x2="608.0" y2="222.5" stroke="#1f9d6b" stroke-width="1.6"/>
-<text x="661.0" y="220.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >95 %</text>
+<text x="661.0" y="220.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#c0392b" text-anchor="start" >98 %</text>
 <text x="425.0" y="234.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Débogage</text>
 <rect x="503" y="228" width="150" height="6" rx="3" fill="#d9f2e3"/>
 <rect x="503" y="228" width="150.0" height="6" rx="3" fill="#5b45d6"/>

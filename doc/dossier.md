@@ -1,9 +1,9 @@
 ---
 title: "PremièreImpression"
-subtitle: "Dossier de lancement — M1 MIAGE Apprentissage — v0.1.0-SNAPSHOT"
+subtitle: "Dossier de projet — M1 MIAGE Apprentissage — v0.1.0"
 author:
   - Alice O'Péhidémerveille, Bob Léponje, Charles McGill, David Copperfield
-date: 20 octobre 2026
+date: 24 novembre 2026
 ---
 
 # Équipe, comptes développeurs et dépôt
@@ -47,9 +47,11 @@ Une feature a un effet sur **la BD, le back, l'API REST et le front**. Chaque fe
 
 | Version | Alice (candidature) | Bob (tenue) | Charles (préparation) | David (ponctualité) |
 |-----|---------|---------|---------|---------|
-| **v0.1.0** 24/11 | Analyse d'annonce et correspondance avec le profil — *TF-IDF, similarité cosinus* | Ajustement morphologique — *distance pondérée asymétrique, top-k par tas* | Planning de révision jusqu'au jour J — *sac à dos sous contrainte de temps* | Heure de départ — *Connection Scan Algorithm* |
+| **v0.1.0** 24/11 | ✔ Analyse d'annonce et correspondance avec le profil — *TF-IDF, similarité cosinus* | ✔ Ajustement morphologique — *distance pondérée asymétrique, top-k par tas* | ✘ Planning de révision jusqu'au jour J — *sac à dos sous contrainte de temps* | ✘ Heure de départ — *Connection Scan Algorithm* |
 | **v0.2.0** 08/12 | Conflits d'agenda avec temps de trajet — *ordonnancement d'intervalles* | Calendrier des prêts avec délais de nettoyage — *arbre d'intervalles* | Mémorisation des notions — *répétition espacée SM-2* | Marge de sécurité tirée de l'historique des retards — *quantiles empiriques* |
 | **v1.0.0** 19/01 | Parcours d'apprentissage pour combler l'écart de compétences — *tri topologique des prérequis* | Composition de tenue — *contraintes, backtracking* | Simulation d'entretien adaptative — *classement Elo des questions et du candidat* | Répartition des vêtements entre plusieurs entretiens — *algorithme hongrois* |
+
+✔ livrée en v0.1.0 (détail dans les sections F1 et F2) · ✘ non livrée : dans cet exemple, seules deux des quatre features ont été réalisées.
 
 # Architecture
 
@@ -102,8 +104,101 @@ Les étapes s'enchaînent **dans cet ordre, sans en sauter** : on ne commence un
 - La part de l'IA est déclarée **par compétence** dans le graphe en araignée **demandé par le cours** (annexe), car une mesure unique serait biaisée : faire écrire du code par l'IA n'a pas le même poids que lui faire concevoir. Les compétences de **haut niveau** (idéation, conception, spécification, algorithmique, validation) sont séparées de celles de **bas niveau** (code, tests, CI/CD, rédaction, débogage), et chaque axe compare la part IA réelle à un **plafond** que l'équipe s'autorise, plus bas pour le haut niveau. Les valeurs sont mesurées en lignes d'après les PR quand c'est possible, estimées sinon. Une araignée accompagnera chaque feature en 0.1.0, 0.2.0 et 1.0.0.
 - Exemple de critique d'idée obtenue avec l'IA : `exemples-ia/`.
 
-# Annexe : part IA / part humaine {#annexe-part-ia}
+# Livraison v0.1.0
+
+| Feature | Responsable | Algorithme | BD | API | Tests | Couverture |
+|----------|---------|-----------|------|--------------|------|-----|
+| F1 Analyse d'annonce | Alice | TF-IDF, cosinus | `V2__profil_candidature` | `/profils`, `/candidatures`, `…/analyse` | 108 | 99,7 % |
+| F2 Ajustement morphologique | Bob | distance asymétrique, top-k par tas | `V3__tenue` | `…/mensurations`, `/vetements`, `…/vetements-compatibles` | 87 | 98,3 % |
+
+Release : [v0.1.0](https://github.com/pascalpoizat/premiere-impression-exemple/releases/tag/v0.1.0), avec le jar et ce dossier, construits par l'intégration continue. 202 tests au total, dont les règles d'architecture. Les fiches complètes sont dans `doc/features/`.
+
+# F1 — Analyse d'annonce (Alice)
+
+**Besoin.** Une annonce est un long texte. Le candidat doit y repérer ce qui compte, estimer dans quelle mesure son profil y répond, et savoir ce qui lui manque : c'est là-dessus que l'entretien se jouera. F1 crée aussi le **modèle commun** de l'équipe, le profil et la candidature.
+
+**Algorithme.**
+
+1. *Analyse du texte*, identique pour l'annonce et pour le profil :
+   - minuscules et suppression des accents (normalisation Unicode NFD) ;
+   - découpe en mots, en conservant `c++` et `c#` ;
+   - suppression des mots vides, français, anglais et génériques des annonces ;
+   - **racinisation** simplifiée : « développement », « développeur » et « développerez » donnent tous `developp`.
+2. *TF-IDF* sur le corpus des annonces : `w(t, d) = tf(t, d) × idf(t)`, avec l'idf lissé `idf(t) = 1 + ln((1 + N) / (1 + df(t)))`. Un terme présent partout a le poids minimal, et l'analyse reste utilisable avec une seule annonce en base.
+3. *Similarité cosinus* entre l'annonce et le profil : `cos(a, p) = a·p / (‖a‖ ‖p‖)`, comprise dans [0, 1].
+4. *Résultats* : les k mots-clés de plus fort poids, le score de correspondance, et les **compétences à travailler**, c'est-à-dire les mots-clés absents du profil.
+
+**Complexité.** O(L) pour analyser un texte de L caractères, O(T) pour construire le corpus de T mots, O(V log V) pour trier les V termes d'une annonce.
+
+**Couches.**
+
+- **BD** : `profil` (pseudo unique) et `candidature`.
+- **Back** : module `candidature`. L'analyse est calculée à la demande, car elle dépend du corpus.
+- **API** : `GET /api/v1/candidatures/{id}/analyse?k=10`, avec les erreurs 400, 404 et 409.
+- **Front** : saisie de l'annonce, mots-clés pondérés, score, compétences à travailler.
+
+**Tests (108).**
+
+- Propriétés du cosinus, vérifiées sur 30 couples de vecteurs aléatoires : `cos(x, x) = 1`, symétrie, bornes.
+- `idf` minimal pour un terme présent partout.
+- Invariance à la casse et aux accents.
+- Racinisation.
+- Service testé avec de faux adaptateurs.
+- Persistance et API de bout en bout.
+
+**Limites.** Pas de synonymes ni d'expressions de plusieurs mots (n-grammes envisagés en v0.2.0). Le corpus est rechargé à chaque analyse.
+
+**Part IA / part humaine.** La feature a été choisie par l'humain parmi les propositions de l'IA. Elle a été conçue, codée et testée par l'IA.
+
+![](part-ia/F1-analyse-annonce.svg){.araignee}
+
+# F2 — Ajustement morphologique (Bob)
+
+**Besoin.** La taille de l'étiquette (« M », « 40 ») ne suffit pas à savoir si un vêtement prêté ira. Il faut comparer les **mensurations** de la personne aux **mesures réelles** du vêtement, en tenant compte de l'aisance, puis proposer les k vêtements qui vont le mieux.
+
+**Algorithme.**
+
+1. *Critères par type de vêtement.* Pour une veste, ce sont la carrure, la poitrine et la taille. Chaque critère a un poids, une aisance idéale `a`, une tolérance serrée `s` et une échelle d'ampleur `l`.
+2. *Écart asymétrique*, avec `e = vêtement − corps` :
+   - `e < a − s` : le vêtement est trop petit, il est **éliminé** ;
+   - `a − s ≤ e < a` : il est un peu juste, pénalité `((a − e)/s)²` ;
+   - `e > a` : il est ample, pénalité `((e − a)/l)²`.
+
+   Un vêtement trop grand se porte, un vêtement trop petit non.
+3. *Score* : `1 / (1 + moyenne pondérée des pénalités)`. Il vaut 1 pour un ajustement idéal, et décroît dès qu'on s'en éloigne.
+4. *Top-k* avec un **tas min borné à k éléments**, en O(n log k) au lieu de O(n log n) pour un tri complet. L'ordre est total et déterministe.
+
+**Couches.**
+
+- **BD** : `mensurations`, `vetement` et `mesure_vetement`, avec des contraintes de plausibilité.
+- **Back** : module `tenue`. L'existence d'un profil est vérifiée par le port `ProfilsConnus`, branché sur le module `candidature` : le domaine `tenue` ne dépend d'aucun autre module.
+- **API** : `PUT /api/v1/profils/{id}/mensurations`, `POST /api/v1/vetements`, `GET /api/v1/profils/{id}/vetements-compatibles?k=&type=`.
+- **Front** : mensurations, prêt d'un vêtement, vêtements compatibles avec le détail mesure par mesure.
+
+**Tests (87).**
+
+- Score de 1 à l'aisance idéale.
+- **Monotonie** du score pour chaque type de vêtement.
+- Élimination des vêtements trop petits.
+- On ne se voit jamais proposer ses propres vêtements.
+- **Top-k par tas identique au tri complet**, sur 20 jeux aléatoires.
+- Persistance et API de bout en bout.
+
+**Limites.** Les critères sont fixés dans le code. Ni la matière ni la coupe ne sont prises en compte. La disponibilité des vêtements relève de la feature « calendrier des prêts », prévue en v0.2.0.
+
+**Part IA / part humaine.** L'idée d'origine est humaine : le prêt de tenues entre étudiants. L'IA l'a recentrée sur un problème algorithmique, puis l'a conçue, codée et testée.
+
+![](part-ia/F2-ajustement-morphologique.svg){.araignee}
+
+# Annexe : part IA / part humaine du projet {#annexe-part-ia}
 
 ![](part-ia.svg){.araignee}
 
-État au 20 octobre 2026, pour le dossier de lancement et les deux premières features de la v0.1.0. Les valeurs sont dans `doc/part-ia.json`, et le graphe est régénéré à chaque compilation du dossier. **Constat :** sur ce démarrage, la part IA dépasse le plafond visé sur tous les axes, et surtout sur l'algorithmique et la conception. Les prochaines features devront rééquilibrer en priorité les compétences de haut niveau.
+**Fusion des araignées.**
+
+- Chaque livrable a sa propre araignée, dans `doc/part-ia/` : le dossier de lancement avec le socle technique, F1 et F2.
+- L'araignée du projet est leur **moyenne pondérée**, calculée par `doc/outils/fusion-araignees.py` à chaque compilation.
+- Ici, chaque livrable a le même poids. Une équipe peut préférer pondérer par le nombre de lignes produites ou par le temps passé, à condition de le dire.
+- Les axes et les plafonds sont communs à tous les livrables : le script refuse de fusionner des araignées qui diffèrent.
+
+**Constat.** La part IA dépasse le plafond sur tous les axes, y compris sur le haut niveau (algorithmique 97 %, conception 90 %). C'est assumé pour un exemple réalisé par un enseignant avec une IA, mais ce serait un signal d'alerte pour une équipe d'étudiants : le haut niveau est précisément ce qui est évalué.
