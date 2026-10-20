@@ -151,8 +151,8 @@ L'assistant **applique ces pratiques, explique pourquoi**, et **signale les éca
 ## 10. Traçabilité de l'usage de l'IA
 
 - Chaque PR comporte une section « Usage de l'IA » : outil utilisé, objet de la demande, ce qui a été repris, modifié ou rejeté.
-- La part de l'IA est déclarée **par compétence**, dans un graphe en araignée **demandé par le cours** (`doc/part-ia.json`, généré dans le dossier). Une mesure unique serait biaisée. On distingue le **haut niveau** (idéation, conception, spécification, algorithmique, validation) du **bas niveau** (code, tests, CI/CD, rédaction, débogage), et chaque axe a un **plafond** que l'équipe s'autorise, plus bas pour le haut niveau.
-- À chaque feature, l'assistant **propose des valeurs honnêtes** : mesurées en lignes d'après les PR quand c'est possible, estimées sinon. Il **ne sous-estime jamais sa propre part**, et il signale tout dépassement de plafond, en priorité sur le haut niveau.
+- La part de l'IA est déclarée **par compétence**, dans un graphe en araignée **demandé par le cours** (`doc/part-ia.json`, généré dans le dossier). Une mesure unique serait biaisée. On distingue le **haut niveau** (idéation, conception, spécification, algorithmique, validation) du **bas niveau** (code, tests, CI/CD, rédaction, débogage), et chaque axe a un **plafond** de part IA que l'équipe s'autorise, plus bas pour le haut niveau. Le graphe montre, pour le haut niveau, la **part humaine** (100 − part IA) face au **plancher** (100 − plafond), car c'est le travail humain qu'on évalue, et pour le bas niveau la **part IA** face au plafond ; les JSON gardent la part IA et le plafond.
+- À chaque feature, l'assistant **propose des valeurs honnêtes** : mesurées en lignes d'après les PR quand c'est possible, estimées sinon. Il **ne sous-estime jamais sa propre part**, et il signale toute part humaine sous le plancher (part IA au-dessus du plafond), en priorité sur le haut niveau.
 
 ## 11. Réflexes de l'assistant
 
