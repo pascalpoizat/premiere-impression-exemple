@@ -18,4 +18,13 @@ Il ne communique qu'avec l'API REST : toutes les URL sont dans `api.js`.
 python3 -m http.server 8000 -d front
 ```
 
-Puis ouvrir http://localhost:8000.
+Puis ouvrir http://localhost:8000 (en `http`, et avec `localhost` : c'est une origine autorisée par CORS, contrairement à l'adresse `http://[::]:8000/` affichée par Python).
+
+## Problème connu : menus déroulants vides
+
+Si la page s'affiche mais que les menus (profil, type de vêtement, candidature) restent vides, les appels à l'API échouent :
+
+- **Safari en mode « HTTPS uniquement »** : Safari laisse charger la page après un avertissement, mais bloque sans rien dire les appels en `http` vers l'API (sur `127.0.0.1`, il refuse même la page, avec l'erreur `WebKitErrorDomain: 305`). Utiliser Firefox ou Chrome, ou désactiver ce réglage dans Safari.
+- **Mauvaise adresse** : ouvrir `http://localhost:8000` ou `http://127.0.0.1:8000`, ni `https://` ni `http://[::]:8000/`, sinon le back refuse les appels (CORS, voir `app.cors.origines-autorisees` dans `application.properties`).
+
+La console du navigateur (outils de développement) indique la cause exacte.

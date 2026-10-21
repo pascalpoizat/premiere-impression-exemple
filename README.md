@@ -72,7 +72,7 @@ Sans Docker : `./gradlew bootRun --args='--spring.profiles.active=h2'`
 
 Avec des données de démonstration (profils, annonces réelles, vêtements) : ajouter le profil `demo`, par exemple `--spring.profiles.active=h2,demo`.
 
-Front : `python3 -m http.server 8000 -d front`, puis ouvrir http://localhost:8000 (voir [front/README.md](front/README.md)).
+Front : `python3 -m http.server 8000 -d front`, puis ouvrir http://localhost:8000 (voir [front/README.md](front/README.md), notamment si les menus restent vides).
 
 - API : http://localhost:8080/api/v1/profils, http://localhost:8080/api/v1/candidatures/1/analyse…
 - Swagger UI : http://localhost:8080/swagger-ui.html
