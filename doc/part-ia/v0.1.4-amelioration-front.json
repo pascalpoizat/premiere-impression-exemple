@@ -60,7 +60,7 @@
     {
       "nom": "Idéation",
       "niveau": "haut",
-      "ia": 10,
+      "ia": 0,
       "plafond": 30
     }
   ]

@@ -35,8 +35,8 @@
 <text x="187.0" y="24.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7" font-weight="500" fill="#1f9d6b" text-anchor="end" >part humaine</text>
 <text x="203.0" y="14.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7.5" font-weight="700" fill="#5b45d6" text-anchor="start" letter-spacing="0.8">BAS NIVEAU</text>
 <text x="203.0" y="24.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7" font-weight="500" fill="#5b45d6" text-anchor="start" >part IA</text>
-<g clip-path="url(#moitie-haut)"><polygon points="228.4,49.3 278.0,91.7 303.0,152.0 273.6,209.1 225.0,244.4 173.3,218.8 177.5,164.7 124.8,152.0 133.8,107.6 165.0,59.6" fill="#1f9d6b" fill-opacity="0.22" stroke="#1f9d6b" stroke-width="1.8" stroke-linejoin="round"/><polygon points="218.4,80.1 247.4,113.9 281.4,152.0 256.2,196.4 218.4,223.9 168.3,234.2 133.8,196.4 130.2,152.0 133.8,107.6 171.6,80.1" fill="none" stroke="#1b1f2e" stroke-width="1.4" stroke-dasharray="4 3"/></g>
-<g clip-path="url(#moitie-bas)"><polygon points="228.4,49.3 278.0,91.7 303.0,152.0 273.6,209.1 225.0,244.4 173.3,218.8 177.5,164.7 124.8,152.0 133.8,107.6 165.0,59.6" fill="#5b45d6" fill-opacity="0.22" stroke="#5b45d6" stroke-width="1.8" stroke-linejoin="round"/><polygon points="218.4,80.1 247.4,113.9 281.4,152.0 256.2,196.4 218.4,223.9 168.3,234.2 133.8,196.4 130.2,152.0 133.8,107.6 171.6,80.1" fill="none" stroke="#1b1f2e" stroke-width="1.4" stroke-dasharray="4 3"/></g>
+<g clip-path="url(#moitie-haut)"><polygon points="228.4,49.3 278.0,91.7 303.0,152.0 273.6,209.1 225.0,244.4 173.3,218.8 177.5,164.7 124.8,152.0 133.8,107.6 161.6,49.3" fill="#1f9d6b" fill-opacity="0.22" stroke="#1f9d6b" stroke-width="1.8" stroke-linejoin="round"/><polygon points="218.4,80.1 247.4,113.9 281.4,152.0 256.2,196.4 218.4,223.9 168.3,234.2 133.8,196.4 130.2,152.0 133.8,107.6 171.6,80.1" fill="none" stroke="#1b1f2e" stroke-width="1.4" stroke-dasharray="4 3"/></g>
+<g clip-path="url(#moitie-bas)"><polygon points="228.4,49.3 278.0,91.7 303.0,152.0 273.6,209.1 225.0,244.4 173.3,218.8 177.5,164.7 124.8,152.0 133.8,107.6 161.6,49.3" fill="#5b45d6" fill-opacity="0.22" stroke="#5b45d6" stroke-width="1.8" stroke-linejoin="round"/><polygon points="218.4,80.1 247.4,113.9 281.4,152.0 256.2,196.4 218.4,223.9 168.3,234.2 133.8,196.4 130.2,152.0 133.8,107.6 171.6,80.1" fill="none" stroke="#1b1f2e" stroke-width="1.4" stroke-dasharray="4 3"/></g>
 <circle cx="228.4" cy="49.3" r="2.3" fill="#c0392b"/>
 <circle cx="278.0" cy="91.7" r="2.3" fill="#c0392b"/>
 <circle cx="303.0" cy="152.0" r="2.3" fill="#c0392b"/>
@@ -46,16 +46,16 @@
 <circle cx="177.5" cy="164.7" r="2.3" fill="#c0392b"/>
 <circle cx="124.8" cy="152.0" r="2.3" fill="#1f9d6b"/>
 <circle cx="133.8" cy="107.6" r="2.3" fill="#1f9d6b"/>
-<circle cx="165.0" cy="59.6" r="2.3" fill="#1f9d6b"/>
+<circle cx="161.6" cy="49.3" r="2.3" fill="#1f9d6b"/>
 <text x="425.0" y="30.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#1b1f2e" text-anchor="start" >Part humaine et part IA par compétence</text>
 <line x1="425" y1="46" x2="443" y2="46" stroke="#1b1f2e" stroke-width="1.4" stroke-dasharray="4 3"/>
 <text x="449.0" y="49.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="7.5" font-weight="500" fill="#7a8094" text-anchor="start" >objectif de l&#x27;équipe (en rouge : non tenu)</text>
-<text x="425.0" y="70.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#1f9d6b" text-anchor="start" >Haut niveau : part humaine 62 % en moyenne (plancher 70 %)</text>
+<text x="425.0" y="70.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" fill="#1f9d6b" text-anchor="start" >Haut niveau : part humaine 64 % en moyenne (plancher 70 %)</text>
 <text x="425.0" y="84.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Idéation</text>
 <rect x="503" y="78" width="150" height="6" rx="3" fill="#e4dffb"/>
-<rect x="503" y="78" width="135.0" height="6" rx="3" fill="#1f9d6b"/>
+<rect x="503" y="78" width="150.0" height="6" rx="3" fill="#1f9d6b"/>
 <line x1="608.0" y1="75.5" x2="608.0" y2="86.5" stroke="#1b1f2e" stroke-width="1.6"/>
-<text x="661.0" y="84.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#1f9d6b" text-anchor="start" >90 %</text>
+<text x="661.0" y="84.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#1f9d6b" text-anchor="start" >100 %</text>
 <text x="425.0" y="98.0" font-family="Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="8" font-weight="500" fill="#1b1f2e" text-anchor="start" >Conception</text>
 <rect x="503" y="92" width="150" height="6" rx="3" fill="#e4dffb"/>
 <rect x="503" y="92" width="105.0" height="6" rx="3" fill="#1f9d6b"/>
