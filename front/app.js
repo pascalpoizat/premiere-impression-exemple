@@ -1,6 +1,7 @@
 // Point d'entrée : gestion du profil courant, puis initialisation de chaque section.
 import * as api from './api.js';
 import { $, tenter, EVENEMENT_PROFIL } from './commun.js';
+import { initialiserOnglets } from './onglets.js';
 import { initialiserCandidatures } from './candidature.js';
 import { initialiserTenue } from './tenue.js';
 import { initialiserRevision } from './revision.js';
@@ -30,6 +31,7 @@ async function creerProfil(evenement) {
   }
 }
 
+initialiserOnglets();
 initialiserCandidatures();
 initialiserTenue();
 initialiserRevision();

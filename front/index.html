@@ -22,10 +22,15 @@
       </form>
     </details>
   </header>
+  <nav class="onglets">
+    <a href="#candidatures">Candidatures</a>
+    <a href="#tenue">Tenue</a>
+    <a href="#revision">Révision</a>
+  </nav>
   <p class="erreur" id="erreur" role="alert"></p>
 
   <main>
-    <section id="section-candidature">
+    <section id="section-candidature" data-onglet="candidatures">
       <h2>Candidatures et analyse d'annonce</h2>
       <div class="colonnes">
         <div>
@@ -49,7 +54,7 @@
       </div>
     </section>
 
-    <section id="section-tenue">
+    <section id="section-tenue" data-onglet="tenue">
       <h2>Tenue : vêtements qui me vont</h2>
       <div class="colonnes">
         <div>
@@ -86,7 +91,7 @@
         </div>
       </div>
     </section>
-    <section id="section-revision">
+    <section id="section-revision" data-onglet="revision">
       <h2>Révision : planning jusqu'au jour J</h2>
       <div class="colonnes">
         <div>

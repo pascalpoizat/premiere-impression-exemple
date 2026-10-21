@@ -38,6 +38,7 @@ class RevisionPlaywrightIT extends ApplicationLancee {
         Page page = navigateur.newPage();
         page.navigate(FRONT);
         page.selectOption("#choix-profil", new com.microsoft.playwright.options.SelectOption().setLabel(pseudo));
+        page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Révision")).click();
 
         assertThat(page.locator("#revision-candidature")).containsText(pseudo);
         Locator jours = page.locator("#disponibilites input");
