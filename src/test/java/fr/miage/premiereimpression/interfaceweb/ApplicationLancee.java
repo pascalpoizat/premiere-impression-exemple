@@ -61,6 +61,16 @@ abstract class ApplicationLancee {
         return Long.parseLong(id.group(1));
     }
 
+    /** Un profil avec une seule candidature, dont l'annonce est {@code annonce} ; l'entreprise porte le pseudo. */
+    String profilAvecAnnonce(String annonce) throws IOException, InterruptedException {
+        String pseudo = "annonce-" + System.nanoTime() % 1_000_000;
+        long profil = creer("/profils", "{\"pseudo\": \"%s\"}".formatted(pseudo));
+        creer("/candidatures", """
+                {"profilId": %d, "entreprise": "%s", "poste": "Développeur", "texteAnnonce": "%s"}"""
+                .formatted(profil, pseudo, annonce));
+        return pseudo;
+    }
+
     /**
      * Un profil dont la candidature a son entretien dans {@code jours} jours, avec les concepts de l'exemple E4.
      * Le pseudo sert aussi de nom d'entreprise : le test peut attendre que le front affiche CETTE candidature.
