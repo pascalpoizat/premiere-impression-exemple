@@ -14,6 +14,7 @@ final class ScenarioE4 {
     static final Map<String, String> CTA = Map.of("C1", "3", "C2", "4", "C3", "1");
     static final Map<String, String> MKW = Map.of("C1", "3", "C2", "2", "C3", "2");
     static final String BILAN = "Temps utilisé : 5 h 00 sur 5 h 00 disponibles.";
+    static final int MINUTES_UTILISEES = 300;
 
     private ScenarioE4() {
     }
