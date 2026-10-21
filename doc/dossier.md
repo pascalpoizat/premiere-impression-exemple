@@ -1,6 +1,6 @@
 ---
 title: "PremièreImpression"
-subtitle: "Dossier de projet — M1 MIAGE Apprentissage — v0.1.2"
+subtitle: "Dossier de projet — M1 MIAGE Apprentissage — v0.1.3"
 author:
   - Alice O'Péhidémerveille, Bob Léponje, Charles McGill, David Copperfield
 date: 24 novembre 2026
@@ -218,6 +218,8 @@ Release : [v0.1.0](https://github.com/pascalpoizat/premiere-impression-exemple/r
 F3 était prévue en v0.1.0 : livrée en retard sur le plan, elle fait l'objet d'une version corrective, v0.1.1. Release : [v0.1.1](https://github.com/pascalpoizat/premiere-impression-exemple/releases/tag/v0.1.1), avec le jar et ce dossier, construits par l'intégration continue.
 
 **v0.1.2** ne contient que de la documentation : le circuit de livraison à double pull request (`CONTRIBUTING.md`, `README.md`) et la fermeture des issues par la PR de release, avec un mot-clé en anglais (`Closes #…`). Aucun changement fonctionnel.
+
+**v0.1.3** documente un problème connu du front : sous Safari en mode « HTTPS uniquement », ou à une adresse refusée par CORS, les menus déroulants restent vides (`front/README.md`) ; le message d'erreur du front rappelle d'ouvrir `http://localhost:8000`. Aucun changement fonctionnel.
 
 # F3 — Planning de révision (Charles)
 
