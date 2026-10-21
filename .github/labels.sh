@@ -26,9 +26,9 @@ gh label create 'type: amélioration' --color c5def5 --description 'Amélioratio
 gh label create 'type: bugfix' --color f9d0c4 --description 'Correction d'"'"'un comportement incorrect' --force
 gh label create 'type: chore' --color d4d4d4 --description 'Tâche technique sans effet sur l'"'"'application : outillage, configuration, dépendances' --force
 gh label create 'type: doc' --color ffffff --description 'Documentation seule' --force
-gh label create 'priorité: important' --color b60205 --description 'À traiter en premier' --force
-gh label create 'priorité: moyen' --color fb8c00 --description 'À traiter dans l'"'"'itération' --force
-gh label create 'priorité: faible' --color fbca04 --description 'À traiter si le temps le permet' --force
+gh label create 'priorité: important' --color e57373 --description 'À traiter en premier' --force
+gh label create 'priorité: moyen' --color ffb74d --description 'À traiter dans l'"'"'itération' --force
+gh label create 'priorité: faible' --color fff176 --description 'À traiter si le temps le permet' --force
 
 # Les autres labels commencent par « ~ ».
 renommer 'duplicate' '~duplicate'
