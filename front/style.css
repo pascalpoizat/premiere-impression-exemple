@@ -53,6 +53,29 @@ button { padding: 8px 12px; font: inherit; color: white; background: var(--accen
 table { width: 100%; border-collapse: collapse; font-size: 12px; }
 th, td { padding: 4px 6px; text-align: left; border-bottom: 1px solid var(--bordure); }
 .grille-mesures { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0 12px; }
+.silhouette-mesures { display: flex; margin-bottom: 8px; }
+.silhouette { flex: none; }
+.silhouette .corps { fill: var(--accent-clair); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; }
+/* bras : un trait épais de la couleur du contour, recouvert d'un trait plus fin de la couleur du corps */
+.silhouette .bras-contour, .silhouette .bras { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.silhouette .bras-contour { stroke: var(--accent); stroke-width: 12; }
+.silhouette .bras { stroke: var(--accent-clair); stroke-width: 9; }
+.silhouette .traits { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.silhouette .renvois { stroke: var(--discret); stroke-width: 1; }
+.silhouette .forme { display: none; }
+.silhouette[data-forme="droite"] .forme-droite, .silhouette[data-forme="sablier"] .forme-sablier,
+.silhouette[data-forme="en-v"] .forme-en-v { display: inline; }
+.choix-silhouette { display: flex; margin-bottom: 8px; }
+.choix-silhouette button { padding: 4px 10px; font-size: 12px; color: var(--accent); background: white;
+  border: 1px solid var(--accent); border-radius: 0; }
+.choix-silhouette button:first-child { border-radius: 4px 0 0 4px; }
+.choix-silhouette button:last-child { border-radius: 0 4px 4px 0; }
+.choix-silhouette button + button { border-left: 0; }
+.choix-silhouette button[aria-pressed="true"] { color: white; background: var(--accent); }
+.champs-silhouette { position: relative; flex: 1; min-width: 150px; height: 400px; }
+.champs-silhouette label { position: absolute; top: calc(var(--y) * 1px - 15px); left: 4px; display: flex;
+  align-items: center; gap: 8px; margin: 0; white-space: nowrap; }
+.champs-silhouette input { width: 72px; margin: 0; }
 .ligne { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
 .ligne label { flex: 1; min-width: 120px; }
 .ligne button { margin-bottom: 8px; }
@@ -63,4 +86,8 @@ th, td { padding: 4px 6px; text-align: left; border-bottom: 1px solid var(--bord
 .verdict-AMPLE { color: var(--discret); }
 @media (max-width: 760px) {
   .colonnes { grid-template-columns: 1fr; }
+  /* trop étroit pour la silhouette : les champs s'empilent */
+  .silhouette, .choix-silhouette { display: none; }
+  .champs-silhouette { height: auto; }
+  .champs-silhouette label { position: static; margin-bottom: 8px; }
 }

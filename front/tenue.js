@@ -111,9 +111,18 @@ function afficherCompatibles(ajustements) {
     </div>`).join('');
 }
 
+/** Choix d'affichage seulement : il n'est pas retenu et ne contraint pas les mesures saisies. */
+function choisirSilhouette(forme) {
+  $('.silhouette').dataset.forme = forme;
+  document.querySelectorAll('.choix-silhouette button').forEach((bouton) =>
+    bouton.setAttribute('aria-pressed', String(bouton.dataset.forme === forme)));
+}
+
 export function initialiserTenue() {
   chargerTypes().catch(() => {});
   $('#type-vetement').addEventListener('change', afficherChampsMesures);
+  document.querySelectorAll('.choix-silhouette button').forEach((bouton) =>
+    bouton.addEventListener('click', () => choisirSilhouette(bouton.dataset.forme)));
   $('#form-mensurations').addEventListener('submit', enregistrerMensurations);
   $('#form-vetement').addEventListener('submit', proposerVetement);
   $('#form-recherche').addEventListener('submit', rechercher);

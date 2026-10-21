@@ -60,12 +60,50 @@
         <div>
           <h3>Mes mensurations (cm)</h3>
           <form id="form-mensurations">
-            <div class="grille-mesures">
-              <label>Tour de poitrine <input name="tourPoitrine" type="number" step="0.5" min="50" max="200" required></label>
-              <label>Tour de taille <input name="tourTaille" type="number" step="0.5" min="40" max="200" required></label>
-              <label>Tour de hanches <input name="tourHanches" type="number" step="0.5" min="50" max="200" required></label>
-              <label>Longueur de jambe <input name="longueurJambe" type="number" step="0.5" min="40" max="130" required></label>
-              <label>Carrure <input name="carrure" type="number" step="0.5" min="25" max="70" required></label>
+            <!-- silhouette fixe, choisie pour l'affichage seulement : chaque champ est à la hauteur (--y, en px) du trait de sa mesure -->
+            <div class="choix-silhouette" role="group" aria-label="Silhouette affichée">
+              <button type="button" data-forme="droite" aria-pressed="true">Droite</button>
+              <button type="button" data-forme="sablier" aria-pressed="false">Sablier</button>
+              <button type="button" data-forme="en-v" aria-pressed="false">En V</button>
+            </div>
+            <div class="silhouette-mesures">
+              <svg class="silhouette" data-forme="droite" viewBox="0 0 140 400" width="140" height="400" aria-hidden="true">
+                <circle class="corps" cx="60" cy="30" r="18"/>
+                <rect class="corps" x="54" y="46" width="12" height="14"/>
+                <g class="forme forme-droite">
+                  <path class="corps" d="M33,64 Q60,57 87,64 L86,110 L85,150 L86,195 L86,210 L34,210 L34,195 L35,150 L34,110 Z"/>
+                  <path class="corps" d="M36,210 L58,210 L56,385 L41,385 Z M62,210 L84,210 L79,385 L64,385 Z"/>
+                  <path class="bras-contour" d="M31,68 L22,140 L24,200 M89,68 L98,140 L96,200"/>
+                  <path class="bras" d="M31,68 L22,140 L24,200 M89,68 L98,140 L96,200"/>
+                  <path class="traits" d="M33,64 H87 M34,100 H86 M35,150 H85 M34,195 H86"/>
+                  <path class="traits renvois" d="M87,64 H140 M86,100 H140 M85,150 H140 M86,195 H140"/>
+                </g>
+                <g class="forme forme-sablier">
+                  <path class="corps" d="M30,64 Q60,56 90,64 L86,110 L80,150 L88,195 L88,210 L32,210 L32,195 L40,150 L34,110 Z"/>
+                  <path class="corps" d="M34,210 L58,210 L56,385 L40,385 Z M62,210 L86,210 L80,385 L64,385 Z"/>
+                  <path class="bras-contour" d="M28,68 L17,140 L21,200 M92,68 L103,140 L99,200"/>
+                  <path class="bras" d="M28,68 L17,140 L21,200 M92,68 L103,140 L99,200"/>
+                  <path class="traits" d="M30,64 H90 M33,100 H87 M40,150 H80 M32,195 H88"/>
+                  <path class="traits renvois" d="M90,64 H140 M87,100 H140 M80,150 H140 M88,195 H140"/>
+                </g>
+                <g class="forme forme-en-v">
+                  <path class="corps" d="M24,64 Q60,54 96,64 L90,110 L82,150 L80,195 L80,210 L40,210 L40,195 L38,150 L30,110 Z"/>
+                  <path class="corps" d="M40,210 L58,210 L57,385 L43,385 Z M62,210 L80,210 L77,385 L63,385 Z"/>
+                  <path class="bras-contour" d="M22,68 L13,140 L17,200 M98,68 L107,140 L103,200"/>
+                  <path class="bras" d="M22,68 L13,140 L17,200 M98,68 L107,140 L103,200"/>
+                  <path class="traits" d="M24,64 H96 M29,100 H91 M38,150 H82 M40,195 H80"/>
+                  <path class="traits renvois" d="M96,64 H140 M91,100 H140 M82,150 H140 M80,195 H140"/>
+                </g>
+                <path class="traits" d="M60,214 V385"/>
+                <path class="traits renvois" d="M60,300 H140"/>
+              </svg>
+              <div class="champs-silhouette">
+                <label style="--y: 64"><input name="carrure" type="number" step="0.5" min="25" max="70" required> Carrure</label>
+                <label style="--y: 100"><input name="tourPoitrine" type="number" step="0.5" min="50" max="200" required> Tour de poitrine</label>
+                <label style="--y: 150"><input name="tourTaille" type="number" step="0.5" min="40" max="200" required> Tour de taille</label>
+                <label style="--y: 195"><input name="tourHanches" type="number" step="0.5" min="50" max="200" required> Tour de hanches</label>
+                <label style="--y: 300"><input name="longueurJambe" type="number" step="0.5" min="40" max="130" required> Longueur de jambe</label>
+              </div>
             </div>
             <button type="submit">Enregistrer</button>
           </form>
