@@ -29,4 +29,6 @@ Si la page s'affiche mais que les menus (profil, type de vêtement, candidature)
 - **Safari en mode « HTTPS uniquement »** : Safari laisse charger la page après un avertissement, mais bloque sans rien dire les appels en `http` vers l'API (sur `127.0.0.1`, il refuse même la page, avec l'erreur `WebKitErrorDomain: 305`). Utiliser Firefox ou Chrome, ou désactiver ce réglage dans Safari.
 - **Mauvaise adresse** : ouvrir `http://localhost:8000` ou `http://127.0.0.1:8000`, ni `https://` ni `http://[::]:8000/`, sinon le back refuse les appels (CORS, voir `app.cors.origines-autorisees` dans `application.properties`).
 
+- **Ancienne version du front en cache** : après une mise à jour du front, un bouton peut sembler ne rien faire, parce que le navigateur a gardé un ancien fichier JavaScript (`python3 -m http.server` n'envoie aucun en-tête de cache). Recharger sans le cache (Cmd+Maj+R ou Ctrl+Maj+R), ou cocher « Désactiver le cache » dans l'onglet Réseau des outils de développement.
+
 La console du navigateur (outils de développement) indique la cause exacte.

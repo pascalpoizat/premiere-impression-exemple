@@ -94,6 +94,16 @@ Pour une **livraison** (exemple : `v0.1.1`) :
 
 La CI construit le jar et le dossier à partir du tag : la version publiée est celle du tag, sans le « v ».
 
+**Place d'une version dans le dossier.**
+
+| Type de version | Exemple | Numéro | Dans le dossier |
+|---|---|---|---|
+| Feature | nouvel algorithme, nouvelle table | version mineure (v0.2.0) | sa section, avec sa fiche et son araignée |
+| Mineure fonctionnelle | amélioration de saisie ou de visualisation, optimisation d'un algorithme existant, refactoring | patch (v0.1.4) | sa section, avec son araignée, comme une feature |
+| Très mineure | documentation, outillage | patch (v0.1.2) | une ligne dans l'annexe « Historique des versions » |
+
+Chaque version, quel que soit son type, a sa ligne dans l'historique des versions.
+
 ## Usage de l'IA
 
 Voir le protocole dans `doc/dossier.md`. Chaque pull request le renseigne dans sa section « Usage de l'IA ».
