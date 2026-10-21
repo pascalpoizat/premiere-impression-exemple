@@ -1,6 +1,6 @@
 ---
 title: "PremièreImpression"
-subtitle: "Dossier de projet — M1 MIAGE Apprentissage — v0.1.3"
+subtitle: "Dossier de projet — M1 MIAGE Apprentissage — v0.1.4"
 author:
   - Alice O'Péhidémerveille, Bob Léponje, Charles McGill, David Copperfield
 date: 24 novembre 2026
