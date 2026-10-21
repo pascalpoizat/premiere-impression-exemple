@@ -83,10 +83,10 @@ Front : `python3 -m http.server 8000 -d front`, puis ouvrir http://localhost:800
 ```bash
 ./gradlew build          # compile, tests unitaires + intégration, rapport de couverture
 open build/reports/jacoco/test/html/index.html
-./gradlew testInterface  # tests d'interface de F3 (Playwright et Selenium), ports 8080 et 8000 libres
+./gradlew testInterface  # tests d'interface (Playwright), ports 8080 et 8000 libres
 ```
 
-Les tests d'interface lancent eux-mêmes le back et le front, puis pilotent un navigateur : Chromium installé par Playwright (`./gradlew installerNavigateurs`), et le Chrome de la machine pour Selenium. Ils sont coûteux (téléchargement des navigateurs, temps d'exécution) : c'est pour cela qu'ils ont leur propre tâche Gradle, hors de `./gradlew build`, et qu'ils ne tournent que sur la machine du développeur, pas dans la CI de GitHub.
+Les tests d'interface lancent eux-mêmes le back et le front, puis pilotent un navigateur : Chromium, installé par Playwright (`./gradlew installerNavigateurs`). Ils sont coûteux (téléchargement des navigateurs, temps d'exécution) : c'est pour cela qu'ils ont leur propre tâche Gradle, hors de `./gradlew build`, et qu'ils ne tournent que sur la machine du développeur, pas dans la CI de GitHub.
 
 Conventions : `*Test` pour les tests unitaires (sans Spring), `*IT` pour les tests d'intégration (`@SpringBootTest`).
 
