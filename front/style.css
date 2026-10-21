@@ -12,13 +12,14 @@ body { margin: 0; font: 14px/1.5 system-ui, sans-serif; color: var(--texte); bac
 header { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 16px; background: white;
   border-bottom: 1px solid var(--bordure); }
 header h1 { margin: 0; font-size: 20px; color: var(--accent); }
-nav.onglets { display: flex; gap: 4px; max-width: 1100px; margin: 0 auto; padding: 12px 16px 0;
-  border-bottom: 1px solid var(--bordure); }
-nav.onglets a { padding: 8px 16px; color: var(--accent); text-decoration: none; border: 1px solid transparent;
-  border-bottom: 0; border-radius: 6px 6px 0 0; }
-nav.onglets a:hover { background: var(--accent-clair); }
-nav.onglets a[aria-current="page"] { margin-bottom: -1px; font-weight: 600; color: var(--texte); background: white;
-  border-color: var(--bordure); }
+/* onglets « intercalaires » : l'onglet actif se fond dans le cadre de la section qu'il affiche */
+nav.onglets { display: flex; gap: 4px; max-width: 1100px; margin: 16px auto 0; padding: 0 16px 0 24px; }
+nav.onglets a { position: relative; padding: 8px 20px; color: var(--discret); text-decoration: none;
+  background: #eef1f4; border: 1px solid var(--bordure); border-bottom: 0; border-radius: 8px 8px 0 0; }
+nav.onglets a:hover { color: var(--accent); background: var(--accent-clair); }
+nav.onglets a[aria-current="page"] { z-index: 1; margin-bottom: -1px; padding-bottom: 9px; font-weight: 600;
+  color: var(--accent); background: white; }
+main > section[data-onglet] { margin-top: 0; }
 main { max-width: 1100px; margin: 0 auto; padding: 0 16px 32px; }
 section { margin-top: 16px; padding: 16px; background: white; border: 1px solid var(--bordure); border-radius: 8px; }
 h2 { margin: 0 0 12px; font-size: 17px; }
