@@ -1,6 +1,6 @@
 {
   "titre": "Part IA par compétence — projet (fusion)",
-  "commentaire": "Généré par outils/fusion-araignees.py, ne pas modifier à la main. Sources : part-ia/F1-analyse-annonce.json (poids 1), part-ia/F2-ajustement-morphologique.json (poids 1), part-ia/F3-planning-revision.json (poids 1), part-ia/lancement.json (poids 1)",
+  "commentaire": "Généré par outils/fusion-araignees.py, ne pas modifier à la main. Sources : part-ia/F1-analyse-annonce.json (poids 1), part-ia/F2-ajustement-morphologique.json (poids 1), part-ia/F3-planning-revision.json (poids 1), part-ia/lancement.json (poids 1), part-ia/v0.1.4-amelioration-front.json (poids 1)",
   "axes": [
     {
       "nom": "Code",
@@ -23,43 +23,43 @@
     {
       "nom": "Rédaction",
       "niveau": "bas",
-      "ia": 95,
+      "ia": 94,
       "plafond": 70
     },
     {
       "nom": "Débogage",
       "niveau": "bas",
-      "ia": 99,
+      "ia": 97,
       "plafond": 70
     },
     {
       "nom": "Validation",
       "niveau": "haut",
-      "ia": 58,
+      "ia": 53,
       "plafond": 20
     },
     {
       "nom": "Algorithmique",
       "niveau": "haut",
-      "ia": 76,
+      "ia": 77,
       "plafond": 30
     },
     {
       "nom": "Spécification",
       "niveau": "haut",
-      "ia": 76,
+      "ia": 68,
       "plafond": 40
     },
     {
       "nom": "Conception",
       "niveau": "haut",
-      "ia": 74,
+      "ia": 65,
       "plafond": 30
     },
     {
       "nom": "Idéation",
       "niveau": "haut",
-      "ia": 48,
+      "ia": 38,
       "plafond": 30
     }
   ]

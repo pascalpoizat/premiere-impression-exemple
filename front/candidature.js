@@ -3,6 +3,8 @@ import * as api from './api.js';
 import { $, echapper, tenter, pourcentage, EVENEMENT_PROFIL } from './commun.js';
 
 const K = 12;
+const LIBELLE_AFFICHER = 'Afficher';
+const LIBELLE_MASQUER = 'Masquer';
 let profilCourant = null;
 
 async function afficherCandidatures() {
@@ -54,7 +56,18 @@ function afficherAnalyse(candidature, analyse) {
     <h4>Mots-clés de l'annonce</h4>
     <p>${pastilles(analyse.motsCles, '')}</p>
     <h4>Compétences à travailler (${aTravailler.length})</h4>
-    <p>${aTravailler.length ? pastilles(aTravailler, 'manquante') : 'Toutes les compétences clés sont dans votre profil.'}</p>`;
+    <p>${aTravailler.length ? pastilles(aTravailler, 'manquante') : 'Toutes les compétences clés sont dans votre profil.'}</p>
+    <h4>Annonce</h4>
+    <button type="button" id="bascule-annonce">${LIBELLE_AFFICHER}</button>
+    <p id="texte-annonce" class="annonce" hidden>${echapper(candidature.texteAnnonce)}</p>`;
+  $('#bascule-annonce').addEventListener('click', basculerAnnonce);
+}
+
+/** L'annonce est masquée au départ ; le bouton porte l'action qu'il déclenchera. */
+function basculerAnnonce() {
+  const texte = $('#texte-annonce');
+  texte.hidden = !texte.hidden;
+  $('#bascule-annonce').textContent = texte.hidden ? LIBELLE_AFFICHER : LIBELLE_MASQUER;
 }
 
 async function enregistrer(evenement) {

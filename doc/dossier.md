@@ -128,7 +128,7 @@ Le résultat se lit dans l'araignée de F3 : sur le haut niveau, la part humaine
 
 Release : [v0.1.0](https://github.com/pascalpoizat/premiere-impression-exemple/releases/tag/v0.1.0), avec le jar et ce dossier, construits par l'intégration continue. 202 tests au total, dont les règles d'architecture. Les fiches complètes sont dans `doc/features/`.
 
-# F1 — Analyse d'annonce (Alice)
+# F1 — Analyse d'annonce (Alice) {#f1}
 
 **Besoin.** Une annonce est un long texte. Le candidat doit y repérer ce qui compte, estimer dans quelle mesure son profil y répond, et savoir ce qui lui manque : c'est là-dessus que l'entretien se jouera. F1 crée aussi le **modèle commun** de l'équipe, le profil et la candidature.
 
@@ -167,7 +167,7 @@ Release : [v0.1.0](https://github.com/pascalpoizat/premiere-impression-exemple/r
 
 ![](part-ia/F1-analyse-annonce.svg){.araignee}
 
-# F2 — Ajustement morphologique (Bob)
+# F2 — Ajustement morphologique (Bob) {#f2}
 
 **Besoin.** La taille de l'étiquette (« M », « 40 ») ne suffit pas à savoir si un vêtement prêté ira. Il faut comparer les **mensurations** de la personne aux **mesures réelles** du vêtement, en tenant compte de l'aisance, puis proposer les k vêtements qui vont le mieux.
 
@@ -217,11 +217,9 @@ Release : [v0.1.0](https://github.com/pascalpoizat/premiere-impression-exemple/r
 
 F3 était prévue en v0.1.0 : livrée en retard sur le plan, elle fait l'objet d'une version corrective, v0.1.1. Release : [v0.1.1](https://github.com/pascalpoizat/premiere-impression-exemple/releases/tag/v0.1.1), avec le jar et ce dossier, construits par l'intégration continue.
 
-**v0.1.2** ne contient que de la documentation : le circuit de livraison à double pull request (`CONTRIBUTING.md`, `README.md`) et la fermeture des issues par la PR de release, avec un mot-clé en anglais (`Closes #…`). Aucun changement fonctionnel.
+Les versions très mineures qui ont suivi (v0.1.2, v0.1.3) sont décrites dans l'[historique des versions](#annexe-versions).
 
-**v0.1.3** documente un problème connu du front : sous Safari en mode « HTTPS uniquement », ou à une adresse refusée par CORS, les menus déroulants restent vides (`front/README.md`) ; le message d'erreur du front rappelle d'ouvrir `http://localhost:8000`. Aucun changement fonctionnel.
-
-# F3 — Planning de révision (Charles)
+# F3 — Planning de révision (Charles) {#f3}
 
 **Besoin.** Une annonce demande des compétences à un certain niveau, et le temps jusqu'à l'entretien est limité. Il faut ordonner la remontée des niveaux selon une stratégie, garder ce qui tient dans le temps disponible, et le répartir jour par jour jusqu'à la veille de l'entretien.
 
@@ -277,7 +275,70 @@ Le code a été **cassé volontairement** à trois endroits : chaque mutation es
 
 ![](part-ia/F3-planning-revision.svg){.araignee}
 
+# Release v0.1.4 {.partie}
+
+# Livraison v0.1.4 : maintenance améliorative du front {#livraison-v014}
+
+| Écran | Avant | Après |
+|---|---|---|
+| Navigation | toutes les fonctionnalités sur une seule page | trois onglets, « Candidatures », « Tenue », « Révision », sous le sélecteur de profil ; l'onglet ouvert est dans l'URL (`#candidatures`, `#tenue`, `#revision`) |
+| F1 | le texte de l'annonce n'était pas visible | annonce en lecture seule sous l'analyse, masquée au départ, bouton « Afficher » / « Masquer » |
+| F2 | cinq champs de mensurations en grille | champs alignés à droite d'une silhouette, au choix « Droite », « Sablier » ou « En V » |
+| F3 | un champ par jour, à 60 min par défaut | budget à 0 par défaut, saisie rapide par jours de la semaine (comme les jours d'un réveil), calendrier mensuel qui affiche dans chaque case le jour, le temps planifié et le budget |
+
+La même version livre aussi une correction, les candidatures affichées en double quand deux chargements se chevauchaient (#12), et une tâche technique, les labels et modèles d'issues par type (#9). Ni la base, ni le back, ni l'API ne changent. 264 tests dans `./gradlew build`, et 13 tests d'interface, désormais écrits avec **Playwright seul** (Selenium a été retiré).
+
+**Une maintenance améliorative n'est pas une feature.** Elle améliore ce qui existe, ici la saisie et la visualisation, sans nouvel algorithme ni changement du modèle de données. Elle ne compte donc pas comme la feature d'un membre pour une itération. Elle est livrée comme un **patch** : v0.1.3 devient v0.1.4. Relier les mots-clés de F1 aux niveaux requis de F3, par exemple, toucherait au modèle de données : ce serait une feature, livrée dans une version mineure (v0.2.0). La même catégorie couvre l'optimisation d'un algorithme existant ou un refactoring : comme ici, elle a sa propre section dans le dossier, alors qu'une version très mineure (documentation, outillage) n'occupe qu'une ligne de l'[historique des versions](#annexe-versions).
+
+**Démarche suivie.** Le circuit est celui d'une feature, à l'échelle d'une amélioration :
+
+- une **issue** au modèle « Amélioration » (#11), avec un label de type et un label de priorité, rédigée et validée **avant** tout code ; son périmètre dit aussi ce qu'on ne fait **pas** ;
+- une **branche** `amelioration/11-…` créée depuis `develop` à jour, **avant la première modification** ;
+- un écran à la fois (onglets, F1, F2, F3) : tests d'abord, vus en échec, puis le code, puis le **test exploratoire** du responsable dans l'application lancée, et alors seulement le commit ;
+- un **bug découvert en route** (#12) n'est pas corrigé en douce dans l'amélioration : il a sa propre issue « Bugfix », sa branche, son test de reproduction et sa PR ; la branche de l'amélioration récupère ensuite la correction depuis `develop` ;
+- la **spécification évolue** au fil des tests exploratoires : la silhouette proposée était perçue comme genrée, d'où le choix entre trois formes ; les chiffres des cases du calendrier étaient difficiles à lire, d'où leur mise en forme. Chaque évolution est **reportée dans l'issue**, qui reste la référence.
+
+**Tests.** Trois façons de concevoir un test d'interface, à retenir :
+
+- **tirés d'un automate** (F1). Le bouton de l'annonce a deux états, 0 « texte masqué, bouton Afficher » et 1 « texte affiché, bouton Masquer », et deux transitions. On écrit un test par trace partant de l'état initial, la trace s'arrêtant quand elle boucle : trois tests. Chaque test vérifie d'abord son état de départ, sinon, lancé seul, il pourrait échouer pour une autre raison que celle qu'il teste ;
+- **de reproduction, déterministe** (#12). Le bug n'apparaissait que si deux chargements du même profil se chevauchaient, donc par intermittence (2 lancements sur 5). Le test provoque le chevauchement à coup sûr : deux événements dans la même tâche JavaScript. Il échoue à chaque fois avant la correction, et passe après ;
+- **protégé contre la réussite à vide** (F3). Le test compare le temps planifié de chaque case à la somme des révisions du jour lue dans le planning détaillé. Si le test ne savait plus lire ce planning, toutes les sommes vaudraient 0, comme un calendrier vide : il vérifie donc aussi que le total vaut les 300 minutes de l'exemple.
+
+Le **test exploratoire** du responsable relève de la Validation, au même titre que la conception des tests. C'est lui qui a trouvé la silhouette genrée, la difficulté de lecture du calendrier, et un faux bug : un ancien fichier JavaScript gardé dans le cache du navigateur.
+
+**Perspectives, volontairement hors de cette version.** Présenter les activités comme un workflow (activités toujours possibles, activités liées à un moment entre l'annonce et l'entretien, relations avant / après) ; signaler les temps planifiés devenus faux quand le budget change, au lieu de les remettre à 0 ; suggérer une silhouette à partir des mesures, sans jamais bloquer la saisie, qui serait une feature de classification ; tester l'uniformité de l'interface et son accessibilité ; corriger l'affichage sur écran étroit.
+
+**Part IA / part humaine.** Le responsable a fixé le besoin écran par écran, tranché chaque choix de présentation, conçu une partie des tests (l'automate de F1, les temps planifiés de F3) et mené tous les tests exploratoires ; l'IA a formalisé les issues, proposé les options, écrit le code et les tests, et mené les diagnostics. Trois axes du haut niveau dépassent leur plafond, et c'est déclaré :
+
+- **Validation** (35 % pour un plafond de 20 %) : l'IA a conçu le test de reproduction de #12, le test de Réinitialiser et la protection contre la réussite à vide ;
+- **Algorithmique** (80 % pour 30 %) : la version n'a pas d'algorithme au sens d'une feature, mais les petits calculs du front (grille d'un mois, temps planifié par jour, liste remplacée d'un bloc pour #12) ont été conçus par l'IA ;
+- **Spécification** (35 % pour 40 %) et **Conception** (30 % pour 30 %) restent sous leur plafond : les options proposées par l'IA ne comptent qu'à proportion de leur poids, le responsable ayant décidé de chacune. L'**Idéation** est entièrement humaine : le besoin vient du responsable.
+
+![](part-ia/v0.1.4-amelioration-front.svg){.araignee}
+
+**Comparer les araignées.** Le dossier permet maintenant de comparer trois profils de livraison :
+
+- des features **menées presque entièrement par l'IA** : F1 et F2, en v0.1.0 ;
+- une feature **contrôlée par l'humain** sur tout le haut niveau : F3, en v0.1.1 ;
+- une **maintenance améliorative**, ici cosmétique : v0.1.4.
+
+Les versions très mineures (v0.1.2, v0.1.3) n'ont pas d'araignée. Il resterait à comparer avec une livraison d'**optimisation** : sans être une feature majeure, elle demanderait sans doute une part humaine plus grande sur le haut niveau, l'axe vert, car optimiser un algorithme suppose de le comprendre et d'en justifier la complexité.
+
+Le calcul des parts IA n'est pas formalisé : ces chiffres sont des estimations argumentées, proposées par l'IA puis corrigées par le responsable. Ils se lisent comme des **points de comparaison entre deux livraisons**, pas comme des mesures absolues.
+
 # Annexes {.partie}
+
+# Annexe : historique des versions {#annexe-versions}
+
+| Version | Date | Type | Contenu |
+|--------|----------|----------|------------------------------------------------|
+| v0.1.0 | 20 octobre 2026 | features | F1 Analyse d'annonce (Alice) et F2 Ajustement morphologique (Bob) ; F4 non livrée. Voir les sections [F1](#f1) et [F2](#f2). |
+| v0.1.1 | 21 octobre 2026 | feature (rattrapage) | F3 Planning de révision (Charles), prévue en v0.1.0. Voir la section [F3](#f3). |
+| v0.1.2 | 21 octobre 2026 | documentation | Circuit de livraison à double pull request ; fermeture des issues par la PR de release, avec un mot-clé en anglais (`Closes #…`). |
+| v0.1.3 | 21 octobre 2026 | documentation | Problème connu : sous Safari en mode « HTTPS uniquement », ou à une adresse refusée par CORS, les menus du front restent vides ; le message d'erreur rappelle d'ouvrir `http://localhost:8000`. |
+| v0.1.4 | 21 octobre 2026 | amélioration | Onglets et améliorations de saisie et de visualisation de F1, F2 et F3 ; correction des candidatures en double ; labels et modèles d'issues par type. Voir la [section v0.1.4](#livraison-v014). |
+
+Une **feature** ou une version **mineure fonctionnelle** (amélioration, optimisation, refactoring) a sa propre section dans ce dossier ; une version **très mineure** (documentation, outillage) n'apparaît qu'ici.
 
 # Annexe : part IA / part humaine du projet {#annexe-part-ia}
 
@@ -285,7 +346,7 @@ Le code a été **cassé volontairement** à trois endroits : chaque mutation es
 
 **Fusion des araignées.**
 
-- Chaque livrable a sa propre araignée, dans `doc/part-ia/` : le dossier de lancement avec le socle technique, F1, F2 et F3.
+- Chaque livrable a sa propre araignée, dans `doc/part-ia/` : le dossier de lancement avec le socle technique, F1, F2, F3 et la maintenance améliorative v0.1.4.
 - L'araignée du projet est leur **moyenne pondérée**, calculée par `doc/outils/fusion-araignees.py` à chaque compilation.
 - Ici, chaque livrable a le même poids. Une équipe peut préférer pondérer par le nombre de lignes produites ou par le temps passé, à condition de le dire.
 - Les axes et les plafonds (donc les planchers) sont communs à tous les livrables : le script refuse de fusionner des araignées qui diffèrent.
