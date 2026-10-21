@@ -36,5 +36,6 @@ initialiserRevision();
 $('#choix-profil').addEventListener('change', annoncerProfilCourant);
 $('#form-profil').addEventListener('submit', creerProfil);
 chargerProfils().catch(() => {
-  $('#erreur').textContent = `API injoignable (${api.API_URL}) : le back est-il lancé ?`;
+  $('#erreur').textContent = `API injoignable (${api.API_URL}) : le back est-il lancé ? `
+    + 'La page est-elle ouverte sur http://localhost:8000 ? (voir front/README.md)';
 });
