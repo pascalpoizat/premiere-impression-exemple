@@ -1,11 +1,12 @@
 ---
 name: Feature
 about: Une feature complète (BD -> back -> tests -> API -> front), portée par UNE personne, avec un algorithme
-labels: feature
+labels: ["type: feature"]
 ---
 
 **Responsable :** @
 **Version visée :** v0.1.0 / v0.2.0 / v1.0.0
+**Priorité :** ajouter le label `priorité: important`, `priorité: moyen` ou `priorité: faible`
 **Fiche :** `doc/features/<version>-F<n>-<nom>.md` (à partir de `doc/features/MODELE-feature.md`)
 
 ## Besoin et scénario d'usage

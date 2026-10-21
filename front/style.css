@@ -2,6 +2,7 @@
   --accent: #1f5f8b;
   --accent-clair: #e3eef6;
   --alerte: #b03a2e;
+  --succes: #2f855a;
   --texte: #222;
   --discret: #6b7280;
   --bordure: #e5e7eb;
@@ -12,6 +13,14 @@ body { margin: 0; font: 14px/1.5 system-ui, sans-serif; color: var(--texte); bac
 header { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 16px; background: white;
   border-bottom: 1px solid var(--bordure); }
 header h1 { margin: 0; font-size: 20px; color: var(--accent); }
+/* onglets « intercalaires » : l'onglet actif se fond dans le cadre de la section qu'il affiche */
+nav.onglets { display: flex; gap: 4px; max-width: 1100px; margin: 16px auto 0; padding: 0 16px 0 24px; }
+nav.onglets a { position: relative; padding: 8px 20px; color: var(--discret); text-decoration: none;
+  background: #eef1f4; border: 1px solid var(--bordure); border-bottom: 0; border-radius: 8px 8px 0 0; }
+nav.onglets a:hover { color: var(--accent); background: var(--accent-clair); }
+nav.onglets a[aria-current="page"] { z-index: 1; margin-bottom: -1px; padding-bottom: 9px; font-weight: 600;
+  color: var(--accent); background: white; }
+main > section[data-onglet] { margin-top: 0; }
 main { max-width: 1100px; margin: 0 auto; padding: 0 16px 32px; }
 section { margin-top: 16px; padding: 16px; background: white; border: 1px solid var(--bordure); border-radius: 8px; }
 h2 { margin: 0 0 12px; font-size: 17px; }
@@ -33,6 +42,8 @@ button { padding: 8px 12px; font: inherit; color: white; background: var(--accen
 .aide { font-size: 12px; color: var(--discret); }
 .erreur { margin: 8px 16px 0; color: var(--alerte); font-weight: 600; }
 .erreur:empty { display: none; }
+.annonce { margin: 8px 0 0; padding: 12px; white-space: pre-line; background: var(--fond);
+  border: 1px solid var(--bordure); border-radius: 4px; }
 .jauge { height: 10px; background: var(--bordure); border-radius: 5px; overflow: hidden; }
 .jauge div { height: 100%; background: var(--accent); }
 .score { margin: 4px 0 0; font-size: 22px; font-weight: 700; color: var(--accent); }
@@ -43,14 +54,65 @@ button { padding: 8px 12px; font: inherit; color: white; background: var(--accen
 table { width: 100%; border-collapse: collapse; font-size: 12px; }
 th, td { padding: 4px 6px; text-align: left; border-bottom: 1px solid var(--bordure); }
 .grille-mesures { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0 12px; }
+.silhouette-mesures { display: flex; margin-bottom: 8px; }
+.silhouette { flex: none; }
+.silhouette .corps { fill: var(--accent-clair); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; }
+/* bras : un trait épais de la couleur du contour, recouvert d'un trait plus fin de la couleur du corps */
+.silhouette .bras-contour, .silhouette .bras { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.silhouette .bras-contour { stroke: var(--accent); stroke-width: 12; }
+.silhouette .bras { stroke: var(--accent-clair); stroke-width: 9; }
+.silhouette .traits { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.silhouette .renvois { stroke: var(--discret); stroke-width: 1; }
+.silhouette .forme { display: none; }
+.silhouette[data-forme="droite"] .forme-droite, .silhouette[data-forme="sablier"] .forme-sablier,
+.silhouette[data-forme="en-v"] .forme-en-v { display: inline; }
+.choix-silhouette { display: flex; margin-bottom: 8px; }
+.choix-silhouette button { padding: 4px 10px; font-size: 12px; color: var(--accent); background: white;
+  border: 1px solid var(--accent); border-radius: 0; }
+.choix-silhouette button:first-child { border-radius: 4px 0 0 4px; }
+.choix-silhouette button:last-child { border-radius: 0 4px 4px 0; }
+.choix-silhouette button + button { border-left: 0; }
+.choix-silhouette button[aria-pressed="true"] { color: white; background: var(--accent); }
+.champs-silhouette { position: relative; flex: 1; min-width: 150px; height: 400px; }
+.champs-silhouette label { position: absolute; top: calc(var(--y) * 1px - 15px); left: 4px; display: flex;
+  align-items: center; gap: 8px; margin: 0; white-space: nowrap; }
+.champs-silhouette input { width: 72px; margin: 0; }
+.boutons-groupes { display: flex; flex-wrap: wrap; margin-bottom: 8px; }
+.boutons-groupes button { padding: 4px 10px; font-size: 12px; color: var(--accent); background: white;
+  border: 1px solid var(--accent); border-radius: 0; }
+.boutons-groupes button:first-child { border-radius: 4px 0 0 4px; }
+.boutons-groupes button:last-child { border-radius: 0 4px 4px 0; }
+.boutons-groupes button + button { border-left: 0; }
+.boutons-groupes button[aria-pressed="true"] { color: white; background: var(--accent); }
+#bascules-jours button { min-width: 32px; }
+.saisie-rapide .ligne label { flex: 0 1 140px; }
+table.mois { width: auto; margin: 8px 16px 8px 0; display: inline-table; vertical-align: top; }
+table.mois caption { text-align: left; font-weight: 600; padding-bottom: 4px; }
+table.mois th, table.mois td { width: 52px; height: 58px; padding: 2px 4px; text-align: center; vertical-align: top;
+  border: 1px solid var(--bordure); }
+table.mois th { height: auto; }
+table.mois td[data-date] { cursor: pointer; background: white; }
+table.mois td[data-date]:hover { background: var(--accent-clair); }
+table.mois td.selectionne { box-shadow: inset 0 0 0 2px var(--accent); }
+table.mois td.hors { color: var(--bordure); background: var(--fond); }
+table.mois .numero { display: block; margin-bottom: 2px; font-size: 11px; color: var(--discret);
+  border-bottom: 1px solid var(--bordure); }
+table.mois .revision { display: block; color: var(--texte); }
+table.mois .revision.planifie { color: var(--succes); }
+table.mois .volume { display: block; font-weight: 600; color: var(--texte); }
+table.mois input { width: 100%; margin: 0; padding: 2px; font-size: 12px; }
 .ligne { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
 .ligne label { flex: 1; min-width: 120px; }
 .ligne button { margin-bottom: 8px; }
 .carte { padding: 10px 0; border-bottom: 1px solid var(--bordure); }
 .carte .entete { display: flex; justify-content: space-between; gap: 12px; }
 .verdict-JUSTE { color: #b7791f; }
-.verdict-IDEAL { color: #2f855a; font-weight: 600; }
+.verdict-IDEAL { color: var(--succes); font-weight: 600; }
 .verdict-AMPLE { color: var(--discret); }
 @media (max-width: 760px) {
   .colonnes { grid-template-columns: 1fr; }
+  /* trop étroit pour la silhouette : les champs s'empilent */
+  .silhouette, .choix-silhouette { display: none; }
+  .champs-silhouette { height: auto; }
+  .champs-silhouette label { position: static; margin-bottom: 8px; }
 }

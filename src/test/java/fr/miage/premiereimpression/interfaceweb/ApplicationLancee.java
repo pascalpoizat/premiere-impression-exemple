@@ -61,16 +61,31 @@ abstract class ApplicationLancee {
         return Long.parseLong(id.group(1));
     }
 
+    /** Un profil {@code pseudo} et sa candidature (entreprise {@code pseudo}), entretien dans {@code jours} jours ; renvoie son id. */
+    long candidatureAvecEntretienDans(String pseudo, int jours) throws IOException, InterruptedException {
+        long profil = creer("/profils", "{\"pseudo\": \"%s\"}".formatted(pseudo));
+        return creer("/candidatures", """
+                {"profilId": %d, "entreprise": "%s", "poste": "Développeur", "texteAnnonce": "Annonce",
+                 "dateHeureEntretien": "%sT10:00:00"}""".formatted(profil, pseudo, LocalDate.now().plusDays(jours)));
+    }
+
+    /** Un profil avec une seule candidature, dont l'annonce est {@code annonce} ; l'entreprise porte le pseudo. */
+    String profilAvecAnnonce(String annonce) throws IOException, InterruptedException {
+        String pseudo = "annonce-" + System.nanoTime() % 1_000_000;
+        long profil = creer("/profils", "{\"pseudo\": \"%s\"}".formatted(pseudo));
+        creer("/candidatures", """
+                {"profilId": %d, "entreprise": "%s", "poste": "Développeur", "texteAnnonce": "%s"}"""
+                .formatted(profil, pseudo, annonce));
+        return pseudo;
+    }
+
     /**
      * Un profil dont la candidature a son entretien dans {@code jours} jours, avec les concepts de l'exemple E4.
      * Le pseudo sert aussi de nom d'entreprise : le test peut attendre que le front affiche CETTE candidature.
      */
     String profilAvecE4(int jours) throws IOException, InterruptedException {
         String pseudo = "e4-" + System.nanoTime() % 1_000_000;
-        long profil = creer("/profils", "{\"pseudo\": \"%s\"}".formatted(pseudo));
-        long candidature = creer("/candidatures", """
-                {"profilId": %d, "entreprise": "%s", "poste": "Développeur", "texteAnnonce": "Annonce",
-                 "dateHeureEntretien": "%sT10:00:00"}""".formatted(profil, pseudo, LocalDate.now().plusDays(jours)));
+        long candidature = candidatureAvecEntretienDans(pseudo, jours);
         String concepts = "/candidatures/%d/concepts-requis".formatted(candidature);
         creer(concepts, "{\"nom\": \"C1\", \"actuel\": 3, \"requis\": 5, \"qtn\": 240}");
         creer(concepts, "{\"nom\": \"C2\", \"actuel\": 1, \"requis\": 4, \"qtn\": 60}");

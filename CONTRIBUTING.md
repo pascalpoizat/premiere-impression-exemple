@@ -28,14 +28,32 @@ Entre modules : un module n'utilise jamais le domaine ni les tables d'un autre. 
 - `main` : versions livrées et taguées (`v0.1.0`, `v0.1.1`, …) ; on n'y pousse jamais directement
 - `develop` : intégration
 - `feature/<issue>-<nom-court>` : une branche par feature, partie de `develop`
+- `amelioration/`, `bugfix/`, `chore/`, `doc/<issue>-<nom-court>` : une branche par issue des autres types (voir « Issues et labels »), partie de `develop` elle aussi
 
 Le circuit, de la feature à la release, passe par **deux pull requests**, chacune relue par un autre membre :
 
-1. **Issue** au format « Feature » (fiche, algorithme, critères d'acceptation).
-2. **Branche** `feature/<issue>-<nom-court>` créée depuis `develop` à jour ; un commit par étape de la démarche, avec `Refs #<issue>`.
+1. **Issue** au format « Feature » (fiche, algorithme, critères d'acceptation), ou au format de son type pour les autres travaux.
+2. **Branche** `feature/<issue>-<nom-court>` (ou `amelioration/`, `bugfix/`, `chore/`, `doc/`) créée depuis `develop` à jour, **avant toute modification** ; un commit par étape de la démarche, avec `Refs #<issue>`.
 3. **PR de feature**, de la branche vers `develop`, au format du modèle de PR (checklist, « Usage de l'IA », part IA). Elle contient `Closes #<issue>` et n'est fusionnée qu'une fois la CI verte.
 4. **PR de release**, de `develop` vers `main`, quand une version est prête (voir « Livraisons »).
 5. **Tag annoté** sur `main`, après la fusion : il déclenche la publication de la release et le redéploiement de la page de projet.
+
+## Issues et labels
+
+Tout travail part d'une issue, créée avec le modèle de son type. Chaque issue porte **deux labels**, un par axe :
+
+| Axe | Labels |
+|---|---|
+| Type (pose automatique par le modèle d'issue) | `type: feature`, `type: amélioration`, `type: bugfix`, `type: chore`, `type: doc` |
+| Priorité (à choisir à la création) | `priorité: important`, `priorité: moyen`, `priorité: faible` |
+
+Seule `type: feature` compte comme la feature d'un membre pour une itération. Les autres labels (`~duplicate`, `~invalid`, `~wontfix`, `~question`) commencent par `~`.
+
+« Use this template » ne copie pas les labels : une fois par dépôt, un membre les crée avec la CLI GitHub connectée. Le script est idempotent.
+
+```bash
+.github/labels.sh
+```
 
 **Fermeture des issues.** GitHub ne ferme une issue automatiquement que si une PR fusionnée dans la **branche par défaut** (`main`) contient un mot-clé **en anglais** : `Closes`, `Fixes` ou `Resolves #<issue>` (« Ferme » n'est pas reconnu). La PR de feature, qui vise `develop`, ne ferme donc rien : c'est la **PR de release** qui doit reprendre une ligne `Closes #<issue>` pour chaque feature qu'elle livre.
 
@@ -75,6 +93,16 @@ Pour une **livraison** (exemple : `v0.1.1`) :
 4. Vérifier que la release contient le jar et `dossier.pdf`, et que la page de projet affiche la nouvelle version.
 
 La CI construit le jar et le dossier à partir du tag : la version publiée est celle du tag, sans le « v ».
+
+**Place d'une version dans le dossier.**
+
+| Type de version | Exemple | Numéro | Dans le dossier |
+|---|---|---|---|
+| Feature | nouvel algorithme, nouvelle table | version mineure (v0.2.0) | sa section, avec sa fiche et son araignée |
+| Mineure fonctionnelle | amélioration de saisie ou de visualisation, optimisation d'un algorithme existant, refactoring | patch (v0.1.4) | sa section, avec son araignée, comme une feature |
+| Très mineure | documentation, outillage | patch (v0.1.2) | une ligne dans l'annexe « Historique des versions » |
+
+Chaque version, quel que soit son type, a sa ligne dans l'historique des versions.
 
 ## Usage de l'IA
 
