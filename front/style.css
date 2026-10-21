@@ -2,6 +2,7 @@
   --accent: #1f5f8b;
   --accent-clair: #e3eef6;
   --alerte: #b03a2e;
+  --succes: #2f855a;
   --texte: #222;
   --discret: #6b7280;
   --bordure: #e5e7eb;
@@ -76,13 +77,37 @@ th, td { padding: 4px 6px; text-align: left; border-bottom: 1px solid var(--bord
 .champs-silhouette label { position: absolute; top: calc(var(--y) * 1px - 15px); left: 4px; display: flex;
   align-items: center; gap: 8px; margin: 0; white-space: nowrap; }
 .champs-silhouette input { width: 72px; margin: 0; }
+.boutons-groupes { display: flex; flex-wrap: wrap; margin-bottom: 8px; }
+.boutons-groupes button { padding: 4px 10px; font-size: 12px; color: var(--accent); background: white;
+  border: 1px solid var(--accent); border-radius: 0; }
+.boutons-groupes button:first-child { border-radius: 4px 0 0 4px; }
+.boutons-groupes button:last-child { border-radius: 0 4px 4px 0; }
+.boutons-groupes button + button { border-left: 0; }
+.boutons-groupes button[aria-pressed="true"] { color: white; background: var(--accent); }
+#bascules-jours button { min-width: 32px; }
+.saisie-rapide .ligne label { flex: 0 1 140px; }
+table.mois { width: auto; margin: 8px 16px 8px 0; display: inline-table; vertical-align: top; }
+table.mois caption { text-align: left; font-weight: 600; padding-bottom: 4px; }
+table.mois th, table.mois td { width: 52px; height: 58px; padding: 2px 4px; text-align: center; vertical-align: top;
+  border: 1px solid var(--bordure); }
+table.mois th { height: auto; }
+table.mois td[data-date] { cursor: pointer; background: white; }
+table.mois td[data-date]:hover { background: var(--accent-clair); }
+table.mois td.selectionne { box-shadow: inset 0 0 0 2px var(--accent); }
+table.mois td.hors { color: var(--bordure); background: var(--fond); }
+table.mois .numero { display: block; margin-bottom: 2px; font-size: 11px; color: var(--discret);
+  border-bottom: 1px solid var(--bordure); }
+table.mois .revision { display: block; color: var(--texte); }
+table.mois .revision.planifie { color: var(--succes); }
+table.mois .volume { display: block; font-weight: 600; color: var(--texte); }
+table.mois input { width: 100%; margin: 0; padding: 2px; font-size: 12px; }
 .ligne { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
 .ligne label { flex: 1; min-width: 120px; }
 .ligne button { margin-bottom: 8px; }
 .carte { padding: 10px 0; border-bottom: 1px solid var(--bordure); }
 .carte .entete { display: flex; justify-content: space-between; gap: 12px; }
 .verdict-JUSTE { color: #b7791f; }
-.verdict-IDEAL { color: #2f855a; font-weight: 600; }
+.verdict-IDEAL { color: var(--succes); font-weight: 600; }
 .verdict-AMPLE { color: var(--discret); }
 @media (max-width: 760px) {
   .colonnes { grid-template-columns: 1fr; }

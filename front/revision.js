@@ -1,8 +1,8 @@
 // Section F3 : concepts requis d'une candidature et planning de révision jusqu'à la veille de l'entretien.
 import * as api from './api.js';
 import { $, echapper, tenter, EVENEMENT_PROFIL } from './commun.js';
+import { afficherSaisieDesDisponibilites, afficherTempsPlanifies, lireDisponibilites } from './disponibilites.js';
 
-const MINUTES_PAR_JOUR_PAR_DEFAUT = 60;
 const JOUR_EN_MS = 24 * 60 * 60 * 1000;
 const STRATEGIES = {
   CLOSE_TO_ACHIEVEMENT: 'CLOSE_TO_ACHIEVEMENT (CTA) : finir d\'abord ce qui est le plus proche de l\'objectif',
@@ -83,9 +83,9 @@ function afficherDisponibilites(candidature) {
     zone.innerHTML = '<p class="aide">L\'entretien est aujourd\'hui ou passé : plus de jour de révision.</p>';
     return;
   }
-  zone.innerHTML = `<p class="aide">Minutes disponibles par jour, jusqu'à la veille de l'entretien (${jours.length} jours) :</p>
-    <div class="grille-mesures">${jours.map((jour) => `<label>${formatJour(jour)}
-      <input type="number" min="0" max="1440" step="15" value="${MINUTES_PAR_JOUR_PAR_DEFAUT}" required></label>`).join('')}</div>`;
+  afficherSaisieDesDisponibilites(zone, jours, () => {
+    $('#planning').innerHTML = '<p class="aide">Disponibilités modifiées : planifiez à nouveau.</p>';
+  });
 }
 
 async function ajouterConcept(evenement) {
@@ -109,9 +109,12 @@ async function planifier(evenement) {
   evenement.preventDefault();
   const candidature = candidatureChoisie();
   if (!candidature) return;
-  const disponibilites = [...$('#disponibilites').querySelectorAll('input')].map((champ) => Number(champ.value));
+  const disponibilites = lireDisponibilites();
   const planning = await tenter(() => api.planningRevision(candidature.id, $('#strategie').value, disponibilites));
-  if (planning) afficherPlanning(planning);
+  if (planning) {
+    afficherPlanning(planning);
+    afficherTempsPlanifies(planning);
+  }
 }
 
 function afficherPlanning(planning) {
@@ -122,7 +125,7 @@ function afficherPlanning(planning) {
       disponibles${planning.tempsInutilise > 0 ? ` · ${formatDuree(planning.tempsInutilise)} inutilisés` : ''}.</p>
     ${joursAvecBlocs.length === 0 ? '<p class="aide">Rien à réviser dans le temps disponible.</p>' : `<table>
       <tr><th>Jour</th><th>Révision</th></tr>
-      ${joursAvecBlocs.map((jour) => `<tr><td>${formatJour(jour.date)}</td><td>${jour.blocs.map((b) =>
+      ${joursAvecBlocs.map((jour) => `<tr data-date="${jour.date}"><td>${formatJour(jour.date)}</td><td>${jour.blocs.map((b) =>
         `${echapper(b.concept)} → niveau ${b.niveau} (${formatDuree(b.duree)})`).join('<br>')}</td></tr>`).join('')}
     </table>`}
     <h4>Niveaux atteints le jour de l'entretien</h4>
