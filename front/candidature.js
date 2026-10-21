@@ -16,17 +16,20 @@ async function afficherCandidatures() {
   const candidatures = await tenter(() => api.listerCandidatures(profil.id)) ?? [];
   // le profil a changé pendant l'appel : cette réponse est périmée, celle du nouveau profil va suivre
   if (profil !== profilCourant) return;
-  for (const candidature of candidatures) {
-    const element = document.createElement('li');
-    const date = candidature.dateHeureEntretien
-      ? new Date(candidature.dateHeureEntretien).toLocaleString('fr-FR', { dateStyle: 'medium', timeStyle: 'short' })
-      : 'date à fixer';
-    element.innerHTML = `<strong>${echapper(candidature.poste)}</strong> — ${echapper(candidature.entreprise)}
-      <span class="aide">${echapper(date)}</span>`;
-    element.addEventListener('click', () => analyser(candidature, element));
-    liste.append(element);
-  }
+  // remplacer d'un bloc, et non ajouter : deux réponses en vol pour le même profil ne s'additionnent pas (#12)
+  liste.replaceChildren(...candidatures.map(elementDeListe));
   if (candidatures.length === 0) liste.innerHTML = '<li class="aide">Aucune candidature pour ce profil.</li>';
+}
+
+function elementDeListe(candidature) {
+  const element = document.createElement('li');
+  const date = candidature.dateHeureEntretien
+    ? new Date(candidature.dateHeureEntretien).toLocaleString('fr-FR', { dateStyle: 'medium', timeStyle: 'short' })
+    : 'date à fixer';
+  element.innerHTML = `<strong>${echapper(candidature.poste)}</strong> — ${echapper(candidature.entreprise)}
+    <span class="aide">${echapper(date)}</span>`;
+  element.addEventListener('click', () => analyser(candidature, element));
+  return element;
 }
 
 async function analyser(candidature, element) {
